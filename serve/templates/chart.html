@@ -1,0 +1,23 @@
+
+<html>
+    <head>
+        <script src="/static/chart.min.js"></script>
+    </head>
+
+    <body>
+
+        <div class="chart-container" style="position: relative; max-width: 768px;">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <pre>
+            {{config | safe}}
+        </pre>
+
+        <script>
+            const data = {{config | safe}}
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, data);
+        </script>
+    </body>
+</html>
