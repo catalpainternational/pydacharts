@@ -16,8 +16,8 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "pydacharts"},
-    packages=setuptools.find_packages(where="pydacharts"),
+    package_dir={"": "."},
+    packages=["pydacharts", "pydacharts.plugins"],
     python_requires=">=3.7",
     install_requires=[
         "pydantic",
