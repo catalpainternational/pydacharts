@@ -17,8 +17,14 @@ For running examples
 
 ```
 pip install flask
-cd  serve
-flask serve
+cd serve
+flask run
 ```
 
 go to localhost:5000
+
+### Building
+```
+pip install build
+python -m build
+```
