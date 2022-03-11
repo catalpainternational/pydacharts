@@ -5,6 +5,7 @@ from enum import Enum
 
 Function = str
 
+
 class DataLabelsPlugin(BaseModel):
     align: str = "center"
     anchor: str = "center"
@@ -15,7 +16,6 @@ class DataLabelsPlugin(BaseModel):
     labels: Optional[Dict]
 
     # Found these at https://chartjs-plugin-datalabels.netlify.app/samples/charts/line.html
-    padding: Optional[int]
     color: Optional[Color]
     borderRadius: Optional[int]
 
@@ -26,12 +26,12 @@ class Label(BaseModel):
     """
 
     class Anchor(str, Enum):
-        center = "center"
+        center_ = "center"
         start = "start"
         end = "end"
 
     class Align(str, Enum):
-        center = "center"
+        center_ = "center"
         start = "start"
         end = "end"
         right = "right"
@@ -48,6 +48,5 @@ class Label(BaseModel):
     opacity: Optional[float]
 
     padding: Optional[int]
-    color: Optional[Color]
     borderRadius: Optional[int]
     backgroundColor: Optional[Color]

@@ -1,14 +1,9 @@
-import calendar
-from pydacharts.charts import Line
-
-from pydacharts.color import ChartColor, ChartColorTransparent
 from pydacharts.models import (
     ChartType,
     Config,
     PieData,
     PieDataSet,
 )
-from random import randint
 
 
 def pie():

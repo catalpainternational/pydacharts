@@ -23,7 +23,7 @@ class SankeyData(BaseModel):
 
 class Sankey(Config):
     type: str = "sankey"
-    data: SankeyData
+    data: SankeyData  # type: ignore
 
     def json(self, *args, **kwargs):
         """

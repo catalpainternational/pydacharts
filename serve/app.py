@@ -1,10 +1,10 @@
 from typing import Callable
 from flask import Flask, render_template
+from pydacharts.models import Config
 
 import examples
 
 app = Flask(__name__)
-from pydacharts.models import Config
 
 
 @app.route("/")
@@ -15,7 +15,6 @@ def hello_world():
         "chart_datalabels.html",
         config=config_json,
     )
-
 
 
 @app.route("/example/datalabels")

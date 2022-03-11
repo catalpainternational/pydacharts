@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, Sequence
 
 from pydantic import BaseModel, Field
 
@@ -18,6 +18,8 @@ class ChartType(str, Enum):
     polararea = "polarArea"
     bubble = "bubble"
     scatter = "scatter"
+    # This is a chart type provided by a plugin
+    sankey = "sankey"
 
 
 class StepOption(str, Enum):
@@ -28,7 +30,7 @@ class StepOption(str, Enum):
 
 class TitleAlign(str, Enum):
     start = "start"
-    center = "center"
+    center_ = "center"
     end = "end"
 
 
@@ -86,7 +88,7 @@ class Dataset(BaseModel):
     borderSkipped: Optional[bool]
     borderDash: Optional[List[int]]
     # Support "combo chart"
-    type: Optional[ChartType]
+    type: Optional[Union[ChartType, str]]
 
 
 class LineDataSet(Dataset):
@@ -102,15 +104,15 @@ class PieDataSet(Dataset):
 
 class Data(BaseModel):
     labels: List[str]
-    datasets: List[Dataset]
+    datasets: Sequence[Dataset]
 
 
 class LineData(Data):
-    datasets: List[LineDataSet]
+    datasets: Sequence[LineDataSet]
 
 
 class PieData(Data):
-    datasets: List[PieDataSet]
+    datasets: Sequence[PieDataSet]
 
 
 class Font(BaseModel):
@@ -119,13 +121,6 @@ class Font(BaseModel):
     style: Optional[str]
     lineHeight: Optional[float]
     weight: Optional[Union[str, int]]
-
-
-class Padding(BaseModel):
-    top: Optional[int]
-    left: Optional[int]
-    right: Optional[int]
-    botttom: Optional[int]
 
 
 class PointStyle(str, Enum):
@@ -326,7 +321,7 @@ class Options(BaseModel):
 
 
 class Config(BaseModel):
-    type: ChartType = ChartType.line
+    type: Union[ChartType, str] = ChartType.line
     data: Data
     options: Optional[Options]
 
