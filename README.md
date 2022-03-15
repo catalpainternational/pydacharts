@@ -1,14 +1,36 @@
 # pydacharts
+
 Pydantic :heart: chartjs
+This is a code generator for [ChartJS](https://www.chartjs.org) configuration JSON.
 
 ## Set Up
 
+1. Pip install the package with `pip install pydacharts` or clone the repo
+2. Use the class generator to write a "config" file. One simple example
+
+
+
+```py
+from pydacharts.models import Config, Data, Dataset
+
+def spending_by_year_chartjs() -> Config:
+    """
+    Return a chartjs "config" object for sip dataset
+    charting
+    """
+    return Config(
+        type="bar",
+        data=Data(
+            labels=["Green is nice", "Red is angry", "Blue is calming"],
+            datasets=[Dataset(
+                backgroundColor = ["green", "red", "blue"],
+                data = [1,2,3],
+                label = "We love colors"
+            )]
+        )
+    )
 ```
-python -m venv env
-. env/bin/activate
-pip install pip-tools
-pip-sync requirements.txt
-```
+(This example should work standalone)
 
 For running examples
 
@@ -25,6 +47,7 @@ go to localhost:5000
 
 ### Building
 ```
-pip install build
-python -m build
+poetry build
+poetry version patch # or "major", "minor"
+poetry publish
 ```

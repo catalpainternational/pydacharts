@@ -319,6 +319,9 @@ class Options(BaseModel):
     indexAxis: Optional[str]
     interaction: Optional[Interaction]
 
+    # Bar chart option
+    barPercentage: Optional[float]
+
 
 class Config(BaseModel):
     type: Union[ChartType, str] = ChartType.line

@@ -6,11 +6,11 @@ line_length = 119
 
 [tool.black]
 line-length = 119
-target-version = ['py37']
+target-version = ['py38']
 
 [tool.poetry]
 name = "pydacharts"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Josh Brooks <josh@catalpa.io>"]
 license = "GPLv3"
