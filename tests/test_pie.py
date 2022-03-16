@@ -1,9 +1,4 @@
-from pydacharts.models import (
-    ChartType,
-    Config,
-    PieData,
-    PieDataSet,
-)
+from pydacharts.models import ChartType, Config, PieData, PieDataSet
 
 
 def test_pie() -> Config:

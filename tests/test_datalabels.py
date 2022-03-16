@@ -1,16 +1,15 @@
 from pydacharts.models import (
     CartesianTicks,
-    Font,
-    Options,
-    ScaleOptions,
-    Scales,
-    Plugins,
+    ChartType,
+    Config,
     Data,
     Dataset,
-    Config,
-    ChartType,
+    Font,
+    Options,
+    Plugins,
+    ScaleOptions,
+    Scales,
 )
-
 from pydacharts.plugins.datalabels import DataLabelsPlugin, Label
 
 

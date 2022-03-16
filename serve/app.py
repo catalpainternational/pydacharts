@@ -1,7 +1,8 @@
 from typing import Callable
-from flask import Flask, render_template
-from pydacharts.models import Config
 
+from flask import Flask, render_template
+
+from pydacharts.models import Config
 from tests import test_datalabels
 
 app = Flask(__name__)

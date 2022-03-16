@@ -1,7 +1,9 @@
-from pydantic import BaseModel
-from pydacharts.models import Font, Color
-from typing import Optional, Dict
 from enum import Enum
+from typing import Dict, Optional
+
+from pydantic import BaseModel
+
+from pydacharts.models import Color, Font
 
 Function = str
 

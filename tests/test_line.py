@@ -1,6 +1,7 @@
 import calendar
-from pydacharts.charts import Line
+from random import randint
 
+from pydacharts.charts import Line
 from pydacharts.color import ChartColor, ChartColorTransparent
 from pydacharts.models import (
     ChartType,
@@ -17,7 +18,6 @@ from pydacharts.models import (
     StepOption,
     Title,
 )
-from random import randint
 
 
 def test_line() -> Config:
