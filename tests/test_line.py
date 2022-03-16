@@ -20,7 +20,7 @@ from pydacharts.models import (
 from random import randint
 
 
-def line():
+def test_line() -> Config:
 
     return Config(
         type=ChartType.line,
@@ -38,7 +38,7 @@ def line():
     )
 
 
-def multi_axis():
+def test_multi_axis() -> Config:
 
     data = LineData(
         labels=[calendar.month_name[i] for i in range(1, 8)],
@@ -76,7 +76,7 @@ def multi_axis():
     return Config(type="line", data=data, options=options)
 
 
-def stepped_line():
+def test_stepped_line() -> Config:
 
     data = LineData(
         labels=[calendar.month_name[i] for i in range(1, 8)],
@@ -100,7 +100,7 @@ def stepped_line():
     return Config(type=ChartType.line, data=data, options=options)
 
 
-def styled_line():
+def test_styled_line() -> Config:
 
     data = LineData(
         labels=[calendar.month_name[i] for i in range(1, 8)],

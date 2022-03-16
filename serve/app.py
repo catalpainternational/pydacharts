@@ -2,14 +2,14 @@ from typing import Callable
 from flask import Flask, render_template
 from pydacharts.models import Config
 
-import examples
+from tests import test_datalabels
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello_world():
-    config = examples.datalabels  # type: Callable[[], Config]
+    config = test_datalabels.test_datalabels  # type: Callable[[], Config]
     config_json = config().json(exclude_none=True, indent=2)
     return render_template(
         "chart_datalabels.html",
@@ -19,19 +19,9 @@ def hello_world():
 
 @app.route("/example/datalabels")
 def get_datalabels_chart():
-    config = examples.datalabels  # type: Callable[[], Config]
+    config = test_datalabels.test_datalabels  # type: Callable[[], Config]
     config_json = config().json(exclude_none=True, indent=2)
     return render_template(
         "chart_datalabels.html",
-        config=config_json,
-    )
-
-
-@app.route("/example/<name>")
-def get_chart(name):
-    config = getattr(examples, name)()  # type: Config
-    config_json = config.json(exclude_none=True, indent=2)
-    return render_template(
-        "chart.html",
         config=config_json,
     )

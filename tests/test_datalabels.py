@@ -34,7 +34,7 @@ class Plugins_(Plugins):
     datalabels: DataLabelsPlugin
 
 
-def datalabels():
+def test_datalabels() -> Config:
 
     _data = [
         ("World Bank", 3703888321),

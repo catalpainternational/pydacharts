@@ -6,7 +6,7 @@ from pydacharts.models import (
 )
 
 
-def pie():
+def test_pie() -> Config:
 
     return Config(
         type=ChartType.pie,

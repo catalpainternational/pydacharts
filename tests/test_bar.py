@@ -17,7 +17,7 @@ from pydacharts.models import (
 )
 
 
-def vertical_bar():
+def test_vertical_bar() -> Config:
 
     bar_data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
@@ -44,7 +44,7 @@ def vertical_bar():
     return Config(type=ChartType.bar, data=bar_data, options=options)
 
 
-def horizontal_bar():
+def test_horizontal_bar() -> Config:
 
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
@@ -76,7 +76,7 @@ def horizontal_bar():
     return Config(type=ChartType.bar, data=data, options=options)
 
 
-def stacked_bar():
+def test_stacked_bar() -> Config:
 
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
@@ -114,7 +114,7 @@ def stacked_bar():
     return Config(type=ChartType.bar, options=options, data=data)
 
 
-def floating_bar():
+def test_floating_bar() -> Config:
 
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
@@ -142,7 +142,7 @@ def floating_bar():
     return Config(type=ChartType.bar, options=options, data=data)
 
 
-def rounded_bar():
+def test_rounded_bar() -> Config:
 
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],

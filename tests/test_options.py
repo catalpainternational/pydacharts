@@ -5,7 +5,7 @@ from pydacharts.color import ChartColor, ChartColorTransparent
 from pydacharts.models import ChartType, Config, Data, Dataset, Options, Plugins, ScaleOptions, Scales, Title
 
 
-def center_positioning():
+def test_center_positioning() -> Config:
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
         datasets=[

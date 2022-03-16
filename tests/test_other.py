@@ -1,7 +1,7 @@
 from pydacharts.plugins import sankey as s
 
 
-def sankey():
+def test_sankey() -> s.Sankey:
     """
     Intended to work together with the "sankey" charts plugin
     """
