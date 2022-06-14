@@ -89,6 +89,7 @@ class Dataset(BaseModel):
     borderDash: Optional[List[int]]
     # Support "combo chart"
     type: Optional[Union[ChartType, str]]
+    order: Optional[int]
 
 
 class LineDataSet(Dataset):
