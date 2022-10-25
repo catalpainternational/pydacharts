@@ -10,14 +10,15 @@ target-version = ['py38']
 
 [tool.poetry]
 name = "pydacharts"
-version = "0.1.2"
+version = "0.1.4"
 description = ""
 authors = ["Josh Brooks <josh@catalpa.io>"]
 license = "GPLv3"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pydantic = "^1.9.0"
+pydantic = "^1.10.0"
 
 [tool.poetry.group.dev.dependencies]
 isort = "*"

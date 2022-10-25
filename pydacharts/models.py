@@ -1,9 +1,12 @@
 from enum import Enum
-from typing import Any, Dict, List, Optional, Sequence, Union, Literal
+from typing import Any, Dict, List, Literal, Optional, Sequence, Union
+
 from pydantic import BaseModel, Field
-from pydacharts.chartjs_types import Padding, Font,  PointStyle, Function, Color, RgbStr, number
+
+from pydacharts.chartjs_types import Color, Font, Function, Padding, PointStyle, RgbStr, number
 from pydacharts.elements import Elements
 from pydacharts.plugins.datalabels import DataLabelsPlugin
+
 
 class ChartType(str, Enum):
     line = "line"
@@ -39,6 +42,7 @@ class LegendPosition(str, Enum):
     bottom = "bottom"
     right = "right"
     chartArea = "chartArea"
+
 
 class Layout(BaseModel):
     """
@@ -170,6 +174,7 @@ class Legend(BaseModel):
         description="This will force the text direction 'rtl' or 'ltr' on the canvas for rendering the legend, regardless of the css specified on the canvas"
     )
     title: Optional[LegendTitle] = Field(description="See the Legend Title Configuration section below.")
+
 
 class TooltipCallbacks(BaseModel):
     beforeTitle: Optional[Function] = Field(description="Returns the text to render before the title.")

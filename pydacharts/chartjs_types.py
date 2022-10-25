@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import Optional, Union
+
 from pydantic import BaseModel
 
 RgbStr = str  # Like `rgb(255, 99, 132)`
@@ -37,6 +38,7 @@ class PointStyle(str, Enum):
     rectRot = "rectRot"
     star = "star"
     triangle = "triangle"
+
 
 class PaddingObject(BaseModel):
     left: Optional[int]

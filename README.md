@@ -8,8 +8,6 @@ This is a code generator for [ChartJS](https://www.chartjs.org) configuration JS
 1. Pip install the package with `pip install pydacharts` or clone the repo
 2. Use the class generator to write a "config" file. One simple example
 
-
-
 ```py
 from pydacharts.models import Config, Data, Dataset
 
@@ -30,10 +28,10 @@ def spending_by_year_chartjs() -> Config:
         )
     )
 ```
+
 (This example should work standalone)
 
 For running examples
-
 
 ### Run Examples
 
@@ -46,8 +44,14 @@ flask run
 go to localhost:5000
 
 ### Building
+
 ```
 poetry build
 poetry version patch # or "major", "minor"
 poetry publish
 ```
+
+### Developing
+
+Clone in `editable` mode
+`pip install -e git+git://github.com/joshbrooks/pydacharts/#egg=pydacharts`
