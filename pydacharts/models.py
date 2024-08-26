@@ -49,39 +49,39 @@ class Layout(BaseModel):
     the global options for the chart layout is defined in Chart.defaults.layout
     """
 
-    padding: Optional[Padding]
+    padding: Optional[Padding] = None
 
 
 class Dataset(BaseModel):
-    label: Optional[str]
-    data: Optional[List[Any]]
-    borderColor: Optional[Union[List[RgbStr], RgbStr]]
-    backgroundColor: Optional[Union[List[RgbStr], RgbStr]]
-    showLine: Optional[bool]
-    hoverOffset: Optional[int]
+    label: Optional[str] = None
+    data: Optional[List[Any]] = None
+    borderColor: Optional[Union[List[RgbStr], RgbStr]] = None
+    backgroundColor: Optional[Union[List[RgbStr], RgbStr]] = None
+    showLine: Optional[bool] = None
+    hoverOffset: Optional[int] = None
     # Support stacked bar charts
-    stack: Optional[str]
+    stack: Optional[str] = None
     # Support rounded bars
-    borderWidth: Optional[int]
-    borderRadius: Optional[int]
-    borderSkipped: Optional[bool]
-    borderDash: Optional[List[int]]
+    borderWidth: Optional[int] = None
+    borderRadius: Optional[int] = None
+    borderSkipped: Optional[bool] = None
+    borderDash: Optional[List[int]] = None
     # Support "combo chart"
-    type: Optional[Union[ChartType, str]]
-    order: Optional[int]
+    type: Optional[Union[ChartType, str]] = None
+    order: Optional[int] = None
 
-    datalabels: Optional[DataLabelsPlugin]
+    datalabels: Optional[DataLabelsPlugin] = None
 
 
 class LineDataSet(Dataset):
     showLine: Optional[bool] = True
     fill: Optional[bool] = False
     tension: Optional[float] = 0.1
-    stepped: Optional[Union[bool, StepOption]]
+    stepped: Optional[Union[bool, StepOption]] = None
 
 
 class PieDataSet(Dataset):
-    ...
+    fill: Optional[bool] = False
 
 
 class Data(BaseModel):
@@ -99,11 +99,11 @@ class PieData(Data):
 
 class Title(BaseModel):
     display: bool = True
-    text: Optional[str]
-    color: Optional[RgbStr]
-    font: Optional[Font]
-    padding: Optional[Padding]
-    align: Optional[Literal["left", "right", "center"]]
+    text: Optional[str] = None
+    color: Optional[RgbStr] = None
+    font: Optional[Font] = None
+    padding: Optional[Padding] = None
+    align: Optional[Literal["left", "right", "center"]] = None
 
 
 class LegendLabels(BaseModel):
@@ -114,7 +114,7 @@ class LegendLabels(BaseModel):
     boxWidth: Optional[int] = Field(40, description="Width of coloured box.")
     boxHeight: Optional[int] = Field(description="Height of the coloured box.")
     color: Optional[Color] = Field(description="Color of label and the strikethrough.")
-    font: Optional[Font]
+    font: Optional[Font] = None
     padding: Optional[int] = Field(description="Padding between rows of colored boxes.")
     generateLabels: Optional[Function] = Field(
         description="Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box. See Legend Item for details."
@@ -258,10 +258,10 @@ class Tooltip(BaseModel):
 
 
 class Plugins(BaseModel):
-    legend: Optional[Legend]
-    title: Optional[Title]
-    datalabels: Optional[Union[DataLabelsPlugin, List[DataLabelsPlugin]]]
-    tooltip: Optional[Tooltip]
+    legend: Optional[Legend] = None
+    title: Optional[Title] = None
+    datalabels: Optional[Union[DataLabelsPlugin, List[DataLabelsPlugin]]] = None
+    tooltip: Optional[Tooltip] = None
 
 
 class Ticks(BaseModel):
@@ -269,7 +269,7 @@ class Ticks(BaseModel):
     Namespace: options.scales[scaleId].ticks
     """
 
-    beginAtZero: Optional[bool]
+    beginAtZero: Optional[bool] = None
     backdropColor: Optional[Color] = Field(description="Color of label backdrops.")
     backdropPadding: Optional[Padding] = Field(description="Padding of label backdrop.")
     callback: Optional[Function] = Field(
@@ -277,11 +277,11 @@ class Ticks(BaseModel):
     )
     display: Optional[bool] = Field(description="If true, show tick labels.")
     color: Optional[Color] = Field(description="Color of ticks.")
-    font: Optional[Font]
+    font: Optional[Font] = None
     major: Optional[Dict] = Field(description="Major ticks configuration.")
     padding: Optional[int] = Field(description="Sets the offset of the tick labels from the axis")
     showLabelBackdrop: Optional[bool] = Field(description="If true, draw a background behind the tick labels.")
-    stepSize: Optional[int]
+    stepSize: Optional[int] = None
     textStrokeColor: Optional[Color] = Field(description="The color of the stroke around the text.")
     textStrokeWidth: Optional[int] = Field(description="Stroke width around the text.")
     z: Optional[int] = Field(
@@ -352,50 +352,194 @@ class CartesianTicks(Ticks):
         description='Should the defined min and max values be presented as ticks even if they are not "nice".'
     )
     labelOffset: Optional[int] = Field(
-        description="Distance in pixels to offset the label from the centre point of the tick (in the x-direction for the x-axis, and the y-direction for the y-axis). Note: this can cause labels at the edges to be cropped by the edge of the canvas"
+        description="Distance in pixels to offset the label from the centre point of the tick (in the x-direction for the horizontal axis, and the y-direction for the vertical axis)."
     )
-    maxRotation: Optional[int] = Field(
-        description="Maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales."
-    )
-    minRotation: Optional[int] = Field(
-        description="Minimum rotation for tick labels. Note: Only applicable to horizontal scales."
-    )
+    minRotation: Optional[int] = Field(description="Minimum rotation for tick labels, in degrees.")
+    maxRotation: Optional[int] = Field(description="Maximum rotation for tick labels, in degrees.")
     mirror: Optional[bool] = Field(
-        description="Flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales."
+        description="Flips tick labels around axis, displaying the labels inside the chart instead of outside."
     )
-    padding: Optional[int] = Field(
-        description="Padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X) direction. When set on a horizontal axis, this applies in the vertical (Y) direction."
+    padding: Optional[int] = Field(description="Padding between the tick label and the axis.")
+    showLabelBackdrop: Optional[bool] = Field(description="If true, draw a background behind the tick labels.")
+    textStrokeColor: Optional[Color] = Field(description="The color of the stroke around the text.")
+    textStrokeWidth: Optional[int] = Field(description="Stroke width around the text.")
+    z: Optional[int] = Field(
+        description="z-index of tick layer. Useful when ticks are drawn on chart area. Values <= 0 are drawn under datasets, > 0 on top."
     )
+
+
+class CartesianGrid(Grid):
+    """
+    Namespace: options.scales[scaleId].grid
+    """
+
+    drawOnChartArea: Optional[bool] = Field(
+        description="If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn."
+    )
+    drawTicks: Optional[bool] = Field(
+        description="If true, draw lines beside the ticks in the axis area beside the chart."
+    )
+    tickMarkLength: Optional[int] = Field(
+        description="Length in pixels that the grid lines will draw into the axis area."
+    )
+    offset: Optional[bool] = Field(
+        description="If true, grid lines will be shifted to be between labels. This is set to true for a bar chart by default."
+    )
+    borderDash: Optional[List[float]] = Field(description="Length and spacing of dashes on grid lines. See MDN.")
+    borderDashOffset: Optional[float] = Field(description="Offset for line dashes. See MDN.")
+    circular: Optional[bool] = Field(description="If true, gridlines are circular (on radar chart only).")
+    color: Optional[Color] = Field(
+        description="The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line, and so on."
+    )
+    display: Optional[bool] = Field(description="If false, do not display grid lines for this axis.")
+    drawBorder: Optional[bool] = Field(
+        description="If true, draw a border at the edge between the axis and the chart area."
+    )
+    lineWidth: Optional[float] = Field(description="Stroke width of grid lines.")
+    tickBorderDash: Optional[List[float]] = Field(
+        description="Length and spacing of the tick mark line. If not set, defaults to the grid line borderDash value."
+    )
+    tickBorderDashOffset: Optional[float] = Field(
+        description="Offset for the line dash of the tick mark. If unset, defaults to the grid line borderDashOffset value"
+    )
+    tickColor: Optional[Color] = Field(
+        description="Color of the tick line. If unset, defaults to the grid line color."
+    )
+    tickLength: Optional[int] = Field(description="Length in pixels that the grid lines will draw into the axis area.")
+    tickWidth: Optional[int] = Field(
+        description="Width of the tick mark in pixels. If unset, defaults to the grid line width."
+    )
+    z: Optional[int] = Field(
+        description="z-index of gridline layer. Values <= 0 are drawn under datasets, > 0 on top."
+    )
+
+
+class CartesianScale(BaseModel):
+    """
+    Namespace: options.scales[scaleId]
+    """
+
+    type: Optional[str] = Field(
+        description="Type of scale being employed. Options are: 'linear', 'logarithmic', 'category', 'time', 'timeseries'."
+    )
+    display: Optional[bool] = Field(description="If true, show the scale.")
+    position: Optional[str] = Field(
+        description="Position of the scale. Options are: 'top', 'left', 'bottom', 'right'."
+    )
+    offset: Optional[bool] = Field(description="If true, the scale will include 0 if it is not already included.")
+    grid: Optional[CartesianGrid] = Field(description="Grid line configuration.")
+    title: Optional[Title] = Field(description="Title configuration.")
+    ticks: Optional[CartesianTicks] = Field(description="Tick configuration.")
+    min: Optional[float] = Field(
+        description="User defined minimum number for the scale, overrides minimum value from data."
+    )
+    max: Optional[float] = Field(
+        description="User defined maximum number for the scale, overrides maximum value from data."
+    )
+    suggestedMin: Optional[float] = Field(description="Adjustment used when calculating the minimum data value.")
+    suggestedMax: Optional[float] = Field(description="Adjustment used when calculating the maximum data value.")
+    stacked: Optional[bool] = Field(description="If true, stacks the data.")
+    stackWeight: Optional[float] = Field(description="Weight of the scale in the stacking group.")
+    axis: Optional[str] = Field(description="Which type of axis this is. Possible values are: 'x', 'y'.")
+    beginAtZero: Optional[bool] = Field(description="If true, scale will include 0 if it is not already included.")
+    reverse: Optional[bool] = Field(description="If true, scale will be reversed.")
+    bounds: Optional[str] = Field(description="Determines the scale bounds. Options are: 'data', 'ticks'.")
+    grace: Optional[Union[str, float]] = Field(description="Add extra space to the scale range.")
+    title: Optional[Title] = Field(description="Title configuration.")
+    ticks: Optional[CartesianTicks] = Field(description="Tick configuration.")
+    grid: Optional[CartesianGrid] = Field(description="Grid line configuration.")
+    min: Optional[float] = Field(
+        description="User defined minimum number for the scale, overrides minimum value from data."
+    )
+    max: Optional[float] = Field(
+        description="User defined maximum number for the scale, overrides maximum value from data."
+    )
+    suggestedMin: Optional[float] = Field(description="Adjustment used when calculating the minimum data value.")
+    suggestedMax: Optional[float] = Field(description="Adjustment used when calculating the maximum data value.")
+    stacked: Optional[bool] = Field(description="If true, stacks the data.")
+    stackWeight: Optional[float] = Field(description="Weight of the scale in the stacking group.")
+    axis: Optional[str] = Field(description="Which type of axis this is. Possible values are: 'x', 'y'.")
+    beginAtZero: Optional[bool] = Field(description="If true, scale will include 0 if it is not already included.")
+    reverse: Optional[bool] = Field(description="If true, scale will be reversed.")
+    bounds: Optional[str] = Field(description="Determines the scale bounds. Options are: 'data', 'ticks'.")
+    grace: Optional[Union[str, float]] = Field(description="Add extra space to the scale range.")
+
+
+class ChartOptions(BaseModel):
+    responsive: Optional[bool] = Field(description="Resizes the chart canvas when its container does.")
+    maintainAspectRatio: Optional[bool] = Field(
+        description="Maintain the original canvas aspect ratio (width / height) when resizing."
+    )
+    aspectRatio: Optional[float] = Field(
+        description="Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas)."
+    )
+    onResize: Optional[Function] = Field(
+        description="Called when a resize occurs. Gets passed two arguments: the chart instance and the new size."
+    )
+    resizeDelay: Optional[int] = Field(description="Delay the resize update by the given number of milliseconds.")
+    devicePixelRatio: Optional[float] = Field(description="Override the window's device pixel ratio.")
+    locale: Optional[str] = Field(description="Locale used for number formatting (using Intl.NumberFormat).")
+    events: Optional[List[str]] = Field(
+        description="The events option defines the browser events that the chart should listen to for tooltips and hovering."
+    )
+    onHover: Optional[Function] = Field(
+        description="Called if the event is a 'mousemove' event and the mouse is over a label item."
+    )
+    onClick: Optional[Function] = Field(
+        description="Called if the event is a 'click' event and the mouse is over a label item."
+    )
+    onLeave: Optional[Function] = Field(
+        description="Called if the event is a 'mousemove' event and the mouse is not over a label item."
+    )
+    animation: Optional[Dict[str, Any]] = Field(description="Animation configuration.")
+    animations: Optional[Dict[str, Any]] = Field(description="Animations configuration.")
+    layout: Optional[Layout] = Field(description="Layout configuration.")
+    plugins: Optional[Plugins] = Field(description="Plugin configuration.")
+    scales: Optional[Dict[str, CartesianScale]] = Field(description="Scales configuration.")
+
+
+class Chart(BaseModel):
+    type: ChartType
+    data: Data
+    options: Optional[ChartOptions] = None
+    plugins: Optional[List[Any]] = None
 
 
 class ScaleOptions(BaseModel):
     display: Optional[bool] = True
-    beginAtZero: Optional[bool]
-    title: Optional[Title]
-    min: Optional[int]
-    max: Optional[int]
-    stacked: Optional[bool]
-    position: Optional[str]
+    beginAtZero: Optional[bool] = None
+    title: Optional[Title] = None
+    min: Optional[int] = None
+    max: Optional[int] = None
+    stacked: Optional[bool] = None
+    position: Optional[str] = None
     offset: bool = True
-    ticks: Optional[Union[Ticks, CartesianTicks]]
-    barThickness: Optional[int]
-    labels: Optional[Any]
-    grid: Optional[Grid]
+    ticks: Optional[Union[Ticks, CartesianTicks]] = None
+    barThickness: Optional[int] = None
+    labels: Optional[Any] = None
+    grid: Optional[Grid] = None
+    type: Optional[str] = None
 
 
 class Scales(BaseModel):
-    y: Optional[ScaleOptions]
-    x: Optional[ScaleOptions]
+    y: Optional[ScaleOptions] = None
+    x: Optional[ScaleOptions] = None
     # Added for datalabels plugin
-    xAxes: Optional[List[ScaleOptions]]
-    yAxes: Optional[List[ScaleOptions]]
+    xAxes: Optional[List[ScaleOptions]] = None
+    yAxes: Optional[List[ScaleOptions]] = None
     # x1, y1 represent additional
-    y1: Optional[ScaleOptions]
-    x1: Optional[ScaleOptions]
+    y1: Optional[ScaleOptions] = None
+    x1: Optional[ScaleOptions] = None
+    grid: Optional[Grid] = None
 
 
 class Interaction(BaseModel):
-    intersect: Optional[bool]  # False for stacked charts
+    intersect: Optional[bool] = None  # False for stacked charts
+    mode: Optional[str] = Field(
+        description="Sets which elements appear in the interaction. See Interaction Modes for details."
+    )
+    axis: Optional[str] = "x"
+    includeInvisible: Optional[bool] = False
 
 
 class Options(BaseModel):
@@ -418,24 +562,25 @@ class Options(BaseModel):
         description="Delay the resize update by give amount of milliseconds. This can ease the resize process by debouncing update of the elements.",
     )
 
-    plugins: Optional[Plugins]
-    scales: Optional[Scales]
-    elements: Optional[Elements]
-    indexAxis: Optional[str]
-    interaction: Optional[Interaction]
+    plugins: Optional[Plugins] = None
+    scales: Optional[Scales] = None
+    elements: Optional[Elements] = None
+    indexAxis: Optional[str] = None
+    interaction: Optional[Interaction] = None
 
     # Bar chart option
-    barPercentage: Optional[float]
-    layout: Optional[Layout]
+    barPercentage: Optional[float] = None
+    layout: Optional[Layout] = None
+    stacked: Optional[bool] = False
 
     # Doughnut chart
-    cutout: Optional[str]
+    cutout: Optional[str] = None
 
 
 class Config(BaseModel):
     type: Union[ChartType, str] = ChartType.line
-    data: Optional[Data]
-    options: Optional[Options]
+    data: Optional[Data] = None
+    options: Optional[Options] = None
 
 
 if __name__ == "__main__":
