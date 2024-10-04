@@ -10,7 +10,13 @@ def test_example():
         type="bar",
         data=Data(
             labels=["Green is nice", "Red is angry", "Blue is calming"],
-            datasets=[Dataset(backgroundColor=["green", "red", "blue"], data=[1, 2, 3], label="We love colors")],
+            datasets=[
+                Dataset(
+                    backgroundColor=["green", "red", "blue"],
+                    data=[1, 2, 3],
+                    label="We love colors",
+                )
+            ],
         ),
     )
 
@@ -42,4 +48,10 @@ def test_pie_chart():
     assert config.data.datasets[0].label == "My First Dataset"
     assert config.data.datasets[0].data == [65, 59, 80, 81, 56]
     assert config.data.datasets[0].fill is False
-    assert config.data.datasets[0].backgroundColor == ["Red", "Orange", "Yellow", "Green", "Blue"]
+    assert config.data.datasets[0].backgroundColor == [
+        "Red",
+        "Orange",
+        "Yellow",
+        "Green",
+        "Blue",
+    ]
