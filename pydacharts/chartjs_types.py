@@ -20,11 +20,11 @@ color: 'rgba(51, 170, 51, .5)'  // RGBa color (semi-transparent)
 
 
 class Font(BaseModel):
-    family: Optional[str]
-    size: Optional[int]
-    style: Optional[str]
-    lineHeight: Optional[float]
-    weight: Optional[Union[str, int]]
+    family: Optional[str] = None
+    size: Optional[int] = None
+    style: Optional[str] = None
+    lineHeight: Optional[float] = None
+    weight: Optional[Union[str, int]] = None
 
 
 class PointStyle(str, Enum):
@@ -41,15 +41,15 @@ class PointStyle(str, Enum):
 
 
 class PaddingObject(BaseModel):
-    left: Optional[int]
-    right: Optional[int]
-    top: Optional[int]
-    bottom: Optional[int]
+    left: Optional[int] = None
+    right: Optional[int] = None
+    top: Optional[int] = None
+    bottom: Optional[int] = None
 
 
 class PaddingXY(BaseModel):
-    x: Optional[int]
-    y: Optional[int]
+    x: Optional[int] = None
+    y: Optional[int] = None
 
 
 Padding = Union[int, PaddingObject, PaddingXY]
@@ -57,5 +57,5 @@ Padding = Union[int, PaddingObject, PaddingXY]
 
 if __name__ == "__main__":
 
-    PaddingObject().json()
-    PaddingXY().json()
+    PaddingObject().model_dump_json()
+    PaddingXY().model_dump_json()
