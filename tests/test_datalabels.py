@@ -20,9 +20,9 @@ class CenteredDataLabel(DataLabelsPlugin):
 
 
 class OffsetTicks(CartesianTicks):
-    mirror = True
-    z = 100
-    padding = 10
+    mirror: bool = True
+    z: int = 100
+    padding: int = 10
 
 
 class RightAlignedScale(ScaleOptions):
@@ -30,8 +30,8 @@ class RightAlignedScale(ScaleOptions):
     ticks: OffsetTicks = OffsetTicks(mirror=True, display=True, z=100, padding=-10)
 
 
-class Plugins_(Plugins):
-    datalabels: DataLabelsPlugin
+class PluginsDataLabels(Plugins):
+    datalabels: DataLabelsPlugin = DataLabelsPlugin()
 
 
 def test_datalabels():
@@ -54,7 +54,7 @@ def test_datalabels():
                 labels=["${0:.0f} M".format(n[1] / 1e6) for n in _data],
             ),
         ),
-        plugins=Plugins_(
+        plugins=PluginsDataLabels(
             datalabels=CenteredDataLabel(
                 labels=dict(
                     name=Label(anchor=Label.Anchor.start, align=Label.Align.end, clamp=True),
