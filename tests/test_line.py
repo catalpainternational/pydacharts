@@ -1,7 +1,6 @@
 import calendar
 from random import randint
 
-from pydacharts.charts import Line
 from pydacharts.color import ChartColor, ChartColorTransparent
 from pydacharts.models import (
     ChartType,

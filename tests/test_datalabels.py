@@ -1,4 +1,3 @@
-import pytest
 from pydacharts.models import (
     CartesianTicks,
     ChartType,
