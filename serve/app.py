@@ -1,8 +1,4 @@
-from typing import Callable
-
 from flask import Flask, render_template
-
-from pydacharts.models import Config
 from .serve_data import config
 
 app = Flask(__name__)
