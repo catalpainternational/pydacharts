@@ -17,8 +17,7 @@ from pydacharts.models import (
 )
 
 
-def test_vertical_bar() -> Config:
-
+def test_vertical_bar():
     bar_data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
         datasets=[
@@ -41,11 +40,13 @@ def test_vertical_bar() -> Config:
         scales=Scales(y=ScaleOptions(beginAtZero=True)),
     )
 
-    return Config(type=ChartType.bar, data=bar_data, options=options)
+    config = Config(type=ChartType.bar, data=bar_data, options=options)
+    assert config.type == ChartType.bar
+    assert config.data == bar_data
+    assert config.options == options
 
 
-def test_horizontal_bar() -> Config:
-
+def test_horizontal_bar():
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
         datasets=[
@@ -73,11 +74,13 @@ def test_horizontal_bar() -> Config:
         scales=Scales(x=ScaleOptions(stacked=True), y=ScaleOptions(stacked=True)),
     )
 
-    return Config(type=ChartType.bar, data=data, options=options)
+    config = Config(type=ChartType.bar, data=data, options=options)
+    assert config.type == ChartType.bar
+    assert config.data == data
+    assert config.options == options
 
 
-def test_stacked_bar() -> Config:
-
+def test_stacked_bar():
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
         datasets=[
@@ -111,11 +114,13 @@ def test_stacked_bar() -> Config:
         scales=Scales(x=ScaleOptions(stacked=True), y=ScaleOptions(stacked=True)),
     )
 
-    return Config(type=ChartType.bar, options=options, data=data)
+    config = Config(type=ChartType.bar, options=options, data=data)
+    assert config.type == ChartType.bar
+    assert config.data == data
+    assert config.options == options
 
 
-def test_floating_bar() -> Config:
-
+def test_floating_bar():
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
         datasets=[
@@ -139,11 +144,13 @@ def test_floating_bar() -> Config:
         ),
     )
 
-    return Config(type=ChartType.bar, options=options, data=data)
+    config = Config(type=ChartType.bar, options=options, data=data)
+    assert config.type == ChartType.bar
+    assert config.data == data
+    assert config.options == options
 
 
-def test_rounded_bar() -> Config:
-
+def test_rounded_bar():
     data = Data(
         labels=[calendar.month_name[i] for i in range(1, 8)],
         datasets=[
@@ -175,4 +182,7 @@ def test_rounded_bar() -> Config:
         ),
     )
 
-    return Config(type=ChartType.bar, options=options, data=data)
+    config = Config(type=ChartType.bar, options=options, data=data)
+    assert config.type == ChartType.bar
+    assert config.data == data
+    assert config.options == options

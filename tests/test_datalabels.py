@@ -1,3 +1,4 @@
+import pytest
 from pydacharts.models import (
     CartesianTicks,
     ChartType,
@@ -33,8 +34,7 @@ class Plugins_(Plugins):
     datalabels: DataLabelsPlugin
 
 
-def test_datalabels() -> Config:
-
+def test_datalabels():
     _data = [
         ("World Bank", 3703888321),
         ("European Union", 1596973970),
@@ -70,33 +70,21 @@ def test_datalabels() -> Config:
 
     data = Data(labels=[n[0] for n in _data], datasets=[ds])
 
-    return Config(type=ChartType.bar, options=options, data=data)
+    config = Config(type=ChartType.bar, options=options, data=data)
 
-
-"""
-
-function App() {
-  const data = {
-    labels: ["ACCESSIBILITY", "FOR ALL AGES", "VARIETY"],
-    datasets: [
-      {
-
-        borderColor: [
-          "rgba(255,99,132,1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)"
-        ],
-        borderWidth: 1
-      }
-    ]
-  };
-  return (
-    <div className="App" style={{ width: 500 }}>
-      <HorizontalBar data={data} width={50} height={35} options={options} />
-    </div>
-  );
-}
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
-"""
+    # Assertions
+    assert config.type == ChartType.bar
+    assert config.data.labels == [n[0] for n in _data]
+    assert config.data.datasets[0].label == "Total Commitment"
+    assert config.data.datasets[0].data == [n[1] / 1e6 for n in _data]
+    assert config.options.indexAxis == "y"
+    assert config.options.scales.y.position == "right"
+    assert config.options.scales.y.ticks.mirror is True
+    assert config.options.scales.y.ticks.z == 100
+    assert config.options.scales.y.ticks.padding == -10
+    assert config.options.plugins.datalabels.offset == 25
+    assert config.options.plugins.datalabels.font.size == 16
+    assert config.options.plugins.datalabels.font.weight == "bold"
+    assert config.options.plugins.datalabels.labels["name"].anchor == Label.Anchor.start
+    assert config.options.plugins.datalabels.labels["name"].align == Label.Align.end
+    assert config.options.plugins.datalabels.labels["name"].clamp is True
