@@ -2,7 +2,17 @@ import calendar
 from random import randint
 
 from pydacharts.color import ChartColor, ChartColorTransparent
-from pydacharts.models import ChartType, Config, Data, Dataset, Options, Plugins, ScaleOptions, Scales, Title
+from pydacharts.models import (
+    ChartType,
+    Config,
+    Data,
+    Dataset,
+    Options,
+    Plugins,
+    ScaleOptions,
+    Scales,
+    Title,
+)
 
 
 def test_center_positioning():
@@ -30,7 +40,9 @@ def test_center_positioning():
 
     options = Options(
         plugins=Plugins(title=Title(display=True, text="Axis Center Positioning")),
-        scales=Scales(x=ScaleOptions(min=-100, max=100), y=ScaleOptions(min=-100, max=100)),
+        scales=Scales(
+            x=ScaleOptions(min=-100, max=100), y=ScaleOptions(min=-100, max=100)
+        ),
     )
 
     config = Config(type=ChartType.scatter, data=data, options=options)
