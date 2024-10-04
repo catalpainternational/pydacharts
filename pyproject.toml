@@ -30,11 +30,6 @@ pytest-cov = "*"
 Flask = "*"
 pre-commit = "*"
 
-[[tool.poetry.source]]
-name = "catalpa"
-url = "https://devpi-beta.lafaek.dev/josh/dev/+simple"
-default = false
-secondary = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
