@@ -10,16 +10,16 @@ class RightAlignedScale(ScaleOptions):
 
 def config():
     _data = [
-            ("World Bank", 3703888321),
-            ("European Union", 1596973970),
-            ("UK - Foreign, Commonwealth and Development Office", 1373918906),
-            ("Asian Development Bank", 1356078649),
-            ("U.S. Agency for International Development", 1101991438),
-            ("Government of Germany", 981575439),
-            ("World Food Programme", 769002439),
-            ("Government of France", 613321247),
-            ("Korea EximBank", 598375000),
-        ]
+        ("World Bank", 3703888321),
+        ("European Union", 1596973970),
+        ("UK - Foreign, Commonwealth and Development Office", 1373918906),
+        ("Asian Development Bank", 1356078649),
+        ("U.S. Agency for International Development", 1101991438),
+        ("Government of Germany", 981575439),
+        ("World Food Programme", 769002439),
+        ("Government of France", 613321247),
+        ("Korea EximBank", 598375000),
+    ]
 
     options = Options(
         indexAxis="y",
