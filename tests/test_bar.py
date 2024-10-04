@@ -36,9 +36,7 @@ def test_vertical_bar():
         ],
     )
     options = Options(
-        plugins=Plugins(
-            title=Title(text="Chart.js Bar Chart"), legend=Legend(position="top")
-        ),
+        plugins=Plugins(title=Title(text="Chart.js Bar Chart"), legend=Legend(position="top")),
         scales=Scales(y=ScaleOptions(beginAtZero=True)),
     )
 
@@ -111,9 +109,7 @@ def test_stacked_bar():
     )
 
     options = Options(
-        plugins=Plugins(
-            title=Title(display=True, text="Charts.js Bar Chart - Grouped")
-        ),
+        plugins=Plugins(title=Title(display=True, text="Charts.js Bar Chart - Grouped")),
         interaction=Interaction(intersect=False),
         scales=Scales(x=ScaleOptions(stacked=True), y=ScaleOptions(stacked=True)),
     )

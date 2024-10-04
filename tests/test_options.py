@@ -40,9 +40,7 @@ def test_center_positioning():
 
     options = Options(
         plugins=Plugins(title=Title(display=True, text="Axis Center Positioning")),
-        scales=Scales(
-            x=ScaleOptions(min=-100, max=100), y=ScaleOptions(min=-100, max=100)
-        ),
+        scales=Scales(x=ScaleOptions(min=-100, max=100), y=ScaleOptions(min=-100, max=100)),
     )
 
     config = Config(type=ChartType.scatter, data=data, options=options)

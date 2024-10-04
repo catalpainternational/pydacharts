@@ -56,9 +56,7 @@ def test_datalabels():
         plugins=PluginsDataLabels(
             datalabels=CenteredDataLabel(
                 labels=dict(
-                    name=Label(
-                        anchor=Label.Anchor.start, align=Label.Align.end, clamp=True
-                    ),
+                    name=Label(anchor=Label.Anchor.start, align=Label.Align.end, clamp=True),
                 )
             )
         ),
