@@ -402,6 +402,7 @@ class Scales(BaseModel):
 class Interaction(BaseModel):
     intersect: Optional[bool] = None  # False for stacked charts
     mode: Optional[str] = Field(
+        None,
         description="Sets which elements appear in the interaction. See Interaction Modes for details."
     )
     axis: Optional[str] = "x"
@@ -452,22 +453,22 @@ class Config(BaseModel):
 
 if __name__ == "__main__":
 
-    Layout().json()
-    Dataset().json()
-    Data(labels=["1", "2", "3"], datasets=[Dataset()]).json()
-    Font().json()
-    Title().json()
-    LegendLabels().json()
-    LegendTitle().json()
-    Legend().json()
-    DataLabelsPlugin().json()
-    TooltipCallbacks().json()
-    Tooltip().json()
-    Plugins().json()
-    Ticks().json()
-    Grid().json()
-    ScaleOptions().json()
-    Scales().json()
-    Interaction().json()
-    Options().json()
-    Config().json()
+    Layout().model_dump_json()
+    Dataset().model_dump_json()
+    Data(labels=["1", "2", "3"], datasets=[Dataset()]).model_dump_json()
+    Font().model_dump_json()
+    Title().model_dump_json()
+    LegendLabels().model_dump_json()
+    LegendTitle().model_dump_json()
+    Legend().model_dump_json()
+    DataLabelsPlugin().model_dump_json()
+    TooltipCallbacks().model_dump_json()
+    Tooltip().model_dump_json()
+    Plugins().model_dump_json()
+    Ticks().model_dump_json()
+    Grid().model_dump_json()
+    ScaleOptions().model_dump_json()
+    Scales().model_dump_json()
+    Interaction().model_dump_json()
+    Options().model_dump_json()
+    Config().model_dump_json()

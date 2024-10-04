@@ -60,7 +60,7 @@ CanvasPattern
 """
 DataLabelsPluginStyle = str
 
-align = Literal[
+align_values = Literal[
     "center",  # (default): the label is centered on the anchor point
     "start",  #: the label is positioned before the anchor point, following the same direction
     "end",  #: the label is positioned after the anchor point, following the same direction
@@ -74,7 +74,7 @@ degrees = int
 
 
 class DataLabelsPlugin(BaseModel):
-    align: Optional[Union[align, degrees]] = None
+    align: Optional[Union[align_values, degrees]] = None
     anchor: Optional[str] = "center"
     backgroundColor: Optional[DataLabelsPluginStyle] = None
     borderColor: Optional[DataLabelsPluginStyle] = None
@@ -105,4 +105,4 @@ class DataLabelsPlugin(BaseModel):
 
 
 if __name__ == "__main__":
-    print(DataLabelsPlugin().json(exclude_none=True))
+    print(DataLabelsPlugin().model_dump_json(exclude_none=True))
