@@ -1,4 +1,12 @@
-from pydacharts.models import Options, Scales, ChartType, Dataset, ScaleOptions, Data, Config
+from pydacharts.models import (
+    Options,
+    Scales,
+    ChartType,
+    Dataset,
+    ScaleOptions,
+    Data,
+    Config,
+)
 from pydacharts.plugins.datalabels import Label
 from tests.test_datalabels import CenteredDataLabel, PluginsDataLabels, OffsetTicks
 
@@ -31,7 +39,9 @@ def config():
         plugins=PluginsDataLabels(
             datalabels=CenteredDataLabel(
                 labels=dict(
-                    name=Label(anchor=Label.Anchor.start, align=Label.Align.end, clamp=True),
+                    name=Label(
+                        anchor=Label.Anchor.start, align=Label.Align.end, clamp=True
+                    ),
                 )
             )
         ),

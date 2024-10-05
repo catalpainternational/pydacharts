@@ -56,6 +56,5 @@ Padding = Union[int, PaddingObject, PaddingXY]
 
 
 if __name__ == "__main__":
-
     PaddingObject().model_dump_json()
     PaddingXY().model_dump_json()
