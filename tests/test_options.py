@@ -2,7 +2,17 @@ import calendar
 from random import randint
 
 from pydacharts.color import ChartColor, ChartColorTransparent
-from pydacharts.models import ChartType, Config, Data, Dataset, Options, Plugins, ScaleOptions, Scales, Title
+from pydacharts.models import (
+    ChartType,
+    Config,
+    Data,
+    Dataset,
+    Options,
+    Plugins,
+    ScaleOptions,
+    Scales,
+    Title,
+)
 
 
 def test_center_positioning():

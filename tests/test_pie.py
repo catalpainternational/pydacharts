@@ -22,4 +22,10 @@ def test_pie():
     assert config.data.datasets[0].label == "My First Dataset"
     assert config.data.datasets[0].data == [65, 59, 80, 81, 56]
     assert config.data.datasets[0].fill is False
-    assert config.data.datasets[0].backgroundColor == ["Red", "Orange", "Yellow", "Green", "Blue"]
+    assert config.data.datasets[0].backgroundColor == [
+        "Red",
+        "Orange",
+        "Yellow",
+        "Green",
+        "Blue",
+    ]

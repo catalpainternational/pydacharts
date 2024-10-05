@@ -26,10 +26,10 @@ class Sankey(Config):
     type: str = "sankey"
     data: SankeyData  # type: ignore
 
-    def json(self, *args, **kwargs):
+    def model_dump_json(self, *args, **kwargs):
         """
         Hack to make python -> json keyword conversion
         """
-        data = super().json(*args, **kwargs)
+        data = super().model_dump_json(*args, **kwargs)
         data = data.replace('"from_":', '"from":')
         return data

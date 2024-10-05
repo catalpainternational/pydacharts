@@ -87,15 +87,8 @@ class PyramidChartOptions(HorizontalBarChartStackedOptions):
 
 class DoughnutChartOptions(Options):
     cutout: str = "80%"
-    scales = Scales(
+    scales: Scales = Scales(
         y=ScaleOptions(display=False, grid=Grid(display=False)),
         x=ScaleOptions(display=False, grid=Grid(display=False)),
     )
     plugins: Plugins = Plugins(title=Title(padding=20, color="#70798C", font=Font(size=20, weight="normal")))
-
-
-if __name__ == "__main__":
-    print(HorizontalBarChartStackedOptions().json(exclude_none=True, indent=1))
-    print(DoughnutChartOptions().json(exclude_none=True, indent=1))
-    print(BarChartOptions().json(exclude_none=True, indent=1))
-    print(PyramidChartOptions().json(exclude_none=True, indent=1))
