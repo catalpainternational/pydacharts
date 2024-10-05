@@ -5,7 +5,7 @@ This is a code generator for [ChartJS](https://www.chartjs.org) configuration JS
 
 ## Set Up
 
-1. Pip install the package with `pip install pydacharts` or clone the repo
+1. Pip install the package with `pip install pydacharts`, `uv add pydacharts`, or clone the repo
 2. Use the class generator to write a "config" file. One simple example
 
 ```py
@@ -35,8 +35,8 @@ For running examples
 
 ### Run Examples
 
-```
-pip install flask
+```bash
+uv sync --extra serve
 cd serve
 flask run
 ```
@@ -45,13 +45,11 @@ go to localhost:5000
 
 ### Building
 
-```
-poetry build
-poetry version patch # or "major", "minor"
-poetry publish
-```
+Update the `version` field in `pyproject.toml`
+Create a git tag same as the version
 
-### Developing
 
-Clone in `editable` mode
-`pip install -e git+git://github.com/joshbrooks/pydacharts/#egg=pydacharts`
+```bash
+uv build
+uv publish --token pypi-YOURTOKENHERE
+```
