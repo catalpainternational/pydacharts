@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from enum import Enum
-from typing import Any, Dict, List, Literal, Optional, Sequence, Union
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -57,43 +58,43 @@ class Layout(BaseModel):
     the global options for the chart layout is defined in Chart.defaults.layout
     """
 
-    padding: Optional[Padding] = None
+    padding: Padding | None = None
 
 
 class Dataset(BaseModel):
-    label: Optional[str] = None
-    data: Optional[List[Any]] = None
-    borderColor: Optional[Union[List[RgbStr], RgbStr]] = None
-    backgroundColor: Optional[Union[List[RgbStr], RgbStr]] = None
-    showLine: Optional[bool] = None
-    hoverOffset: Optional[int] = None
+    label: str | None = None
+    data: list[Any] | None = None
+    borderColor: list[RgbStr] | RgbStr | None = None
+    backgroundColor: list[RgbStr] | RgbStr | None = None
+    showLine: bool | None = None
+    hoverOffset: int | None = None
     # Support stacked bar charts
-    stack: Optional[str] = None
+    stack: str | None = None
     # Support rounded bars
-    borderWidth: Optional[int] = None
-    borderRadius: Optional[int] = None
-    borderSkipped: Optional[bool] = None
-    borderDash: Optional[List[int]] = None
+    borderWidth: int | None = None
+    borderRadius: int | None = None
+    borderSkipped: bool | None = None
+    borderDash: list[int] | None = None
     # Support "combo chart"
-    type: Optional[Union[ChartType, str]] = None
-    order: Optional[int] = None
+    type: ChartType | str | None = None
+    order: int | None = None
 
-    datalabels: Optional[DataLabelsPlugin] = None
+    datalabels: DataLabelsPlugin | None = None
 
 
 class LineDataSet(Dataset):
-    showLine: Optional[bool] = True
-    fill: Optional[bool] = False
-    tension: Optional[float] = 0.1
-    stepped: Optional[Union[bool, StepOption]] = None
+    showLine: bool | None = True
+    fill: bool | None = False
+    tension: float | None = 0.1
+    stepped: bool | StepOption | None = None
 
 
 class PieDataSet(Dataset):
-    fill: Optional[bool] = False
+    fill: bool | None = False
 
 
 class Data(BaseModel):
-    labels: List[str]
+    labels: list[str]
     datasets: Sequence[Dataset]
 
 
@@ -107,11 +108,11 @@ class PieData(Data):
 
 class Title(BaseModel):
     display: bool = True
-    text: Optional[str] = None
-    color: Optional[RgbStr] = None
-    font: Optional[Font] = None
-    padding: Optional[Padding] = None
-    align: Optional[Literal["left", "right", "center"]] = None
+    text: str | None = None
+    color: RgbStr | None = None
+    font: Font | None = None
+    padding: Padding | None = None
+    align: Literal["left", "right", "center"] | None = None
 
 
 class LegendLabels(BaseModel):
@@ -119,138 +120,136 @@ class LegendLabels(BaseModel):
     Namespace: options.plugins.legend.labels
     """
 
-    boxWidth: Optional[int] = Field(40, description="Width of coloured box.")
-    boxHeight: Optional[int] = Field(40, description="Height of the coloured box.")
-    color: Optional[Color] = Field(
+    boxWidth: int | None = Field(40, description="Width of coloured box.")
+    boxHeight: int | None = Field(40, description="Height of the coloured box.")
+    color: Color | None = Field(
         "black", description="Color of label and the strikethrough."
     )
-    font: Optional[Font] = None
-    padding: Optional[int] = Field(
-        5, description="Padding between rows of colored boxes."
-    )
-    generateLabels: Optional[Function] = Field(
+    font: Font | None = None
+    padding: int | None = Field(5, description="Padding between rows of colored boxes.")
+    generateLabels: Function | None = Field(
         None,
         description="Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box. See Legend Item for details.",
     )
-    filter: Optional[Function] = Field(
+    filter: Function | None = Field(
         None,
         description="Filters legend items out of the legend. Receives 2 parameters, a Legend Item and the chart data.",
     )
-    sort: Optional[Function] = Field(
+    sort: Function | None = Field(
         None,
         description="Sorts legend items. Type is : sort(a: LegendItem, b: LegendItem, data: ChartData): number;. Receives 3 parameters, two Legend Items and the chart data. The return value of the function is a number that indicates the order of the two legend item parameters. The ordering matches the return value of Array.prototype.sort()",
     )
-    pointStyle: Optional[PointStyle] = Field(
+    pointStyle: PointStyle | None = Field(
         default=PointStyle.circle,
         description="If specified, this style of point is used for the legend. Only used if usePointStyle is true.",
     )
-    textAlign: Optional[Literal["left", "right", "center"]] = Field(
+    textAlign: Literal["left", "right", "center"] | None = Field(
         default="center",
         description="Horizontal alignment of the label text. Options are: 'left', 'right' or 'center'.",
     )
-    usePointStyle: Optional[bool] = Field(
+    usePointStyle: bool | None = Field(
         default=False,
         description="Label style will match corresponding point style (size is based on the minimum value between boxWidth and font.size).",
     )
 
 
 class LegendTitle(BaseModel):
-    color: Optional[Color] = Field(None, description="Color of text.")
-    display: Optional[bool] = Field(None, description="Is the legend title displayed.")
-    font: Optional[Font] = Field(None, description="See Fonts")
-    padding: Optional[Padding] = Field(None, description="Padding around the title.")
-    text: Optional[str] = Field(None, description="The string title.")
+    color: Color | None = Field(None, description="Color of text.")
+    display: bool | None = Field(None, description="Is the legend title displayed.")
+    font: Font | None = Field(None, description="See Fonts")
+    padding: Padding | None = Field(None, description="Padding around the title.")
+    text: str | None = Field(None, description="The string title.")
 
 
 class Legend(BaseModel):
-    display: Optional[bool] = Field(None, description="Is the legend shown?")
-    position: Optional[str] = Field(None, description="Position of the legend")
-    align: Optional[str] = Field(None, description="Alignment of the legend")
-    maxHeight: Optional[int] = Field(
+    display: bool | None = Field(None, description="Is the legend shown?")
+    position: str | None = Field(None, description="Position of the legend")
+    align: str | None = Field(None, description="Alignment of the legend")
+    maxHeight: int | None = Field(
         None, description="Maximum height of the legend, in pixels"
     )
-    maxWidth: Optional[int] = Field(
+    maxWidth: int | None = Field(
         None, description="Maximum width of the legend, in pixels"
     )
-    fullSize: Optional[bool] = Field(
+    fullSize: bool | None = Field(
         None,
         description="Marks that this box should take the full width/height of the canvas (moving other boxes). This is unlikely to need to be changed in day-to-day use.",
     )
-    onClick: Optional[Function] = Field(
+    onClick: Function | None = Field(
         None,
         description="A callback that is called when a click event is registered on a label item. Arguments: [event, legendItem, legend].",
     )
-    onHover: Optional[Function] = Field(
+    onHover: Function | None = Field(
         None,
         description="A callback that is called when a 'mousemove' event is registered on top of a label item. Arguments: [event, legendItem, legend].",
     )
-    onLeave: Optional[Function] = Field(
+    onLeave: Function | None = Field(
         None,
         description="A callback that is called when a 'mousemove' event is registered outside of a previously hovered label item. Arguments: [event, legendItem, legend].",
     )
-    reverse: Optional[bool] = Field(
+    reverse: bool | None = Field(
         None, description="Legend will show datasets in reverse order."
     )
-    labels: Optional[LegendLabels] = Field(
+    labels: LegendLabels | None = Field(
         None, description="See the Legend Label Configuration section below."
     )
-    rtl: Optional[bool] = Field(
+    rtl: bool | None = Field(
         None, description="true for rendering the legends from right to left."
     )
-    textDirection: Optional[str] = Field(
+    textDirection: str | None = Field(
         None,
         description="This will force the text direction 'rtl' or 'ltr' on the canvas for rendering the legend, regardless of the css specified on the canvas",
     )
-    title: Optional[LegendTitle] = Field(
+    title: LegendTitle | None = Field(
         None, description="See the Legend Title Configuration section below."
     )
 
 
 class TooltipCallbacks(BaseModel):
-    beforeTitle: Optional[Function] = Field(
+    beforeTitle: Function | None = Field(
         None, description="Returns the text to render before the title."
     )
-    title: Optional[Function] = Field(
+    title: Function | None = Field(
         None, description="Returns text to render as the title of the tooltip."
     )
-    afterTitle: Optional[Function] = Field(
+    afterTitle: Function | None = Field(
         None, description="Returns text to render after the title."
     )
-    beforeBody: Optional[Function] = Field(
+    beforeBody: Function | None = Field(
         None, description="Returns text to render before the body section."
     )
-    beforeLabel: Optional[Function] = Field(
+    beforeLabel: Function | None = Field(
         None,
         description="Returns text to render before an individual label. This will be called for each item in the tooltip.",
     )
-    label: Optional[Function] = Field(
+    label: Function | None = Field(
         None,
         description="Returns text to render for an individual item in the tooltip. more...",
     )
-    labelColor: Optional[Function] = Field(
+    labelColor: Function | None = Field(
         None, description="Returns the colors to render for the tooltip item. more..."
     )
-    labelTextColor: Optional[Function] = Field(
+    labelTextColor: Function | None = Field(
         None,
         description="Returns the colors for the text of the label for the tooltip item.",
     )
-    labelPointStyle: Optional[Function] = Field(
+    labelPointStyle: Function | None = Field(
         None,
         description="Returns the point style to use instead of color boxes if usePointStyle is true (object with values pointStyle and rotation). Default implementation uses the point style from the dataset points. more...",
     )
-    afterLabel: Optional[Function] = Field(
+    afterLabel: Function | None = Field(
         None, description="Returns text to render after an individual label."
     )
-    afterBody: Optional[Function] = Field(
+    afterBody: Function | None = Field(
         None, description="Returns text to render after the body section."
     )
-    beforeFooter: Optional[Function] = Field(
+    beforeFooter: Function | None = Field(
         None, description="Returns text to render before the footer section."
     )
-    footer: Optional[Function] = Field(
+    footer: Function | None = Field(
         None, description="Returns text to render as the footer of the tooltip."
     )
-    afterFooter: Optional[Function] = Field(
+    afterFooter: Function | None = Field(
         None, description="Text to render after the footer section."
     )
 
@@ -260,111 +259,109 @@ class Tooltip(BaseModel):
     https://www.chartjs.org/docs/latest/configuration/tooltip.html#tooltip-callbacks
     """
 
-    enabled: Optional[bool] = Field(None, description="Are on-canvas tooltips enabled?")
-    external: Optional[Function] = Field(
-        None, description="See external tooltip section."
-    )
-    mode: Optional[str] = Field(
+    enabled: bool | None = Field(None, description="Are on-canvas tooltips enabled?")
+    external: Function | None = Field(None, description="See external tooltip section.")
+    mode: str | None = Field(
         None, description="Sets which elements appear in the tooltip."
     )
-    intersect: Optional[bool] = Field(
+    intersect: bool | None = Field(
         None,
         description="If true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.",
     )
-    position: Optional[str] = Field(
+    position: str | None = Field(
         None, description="The mode for positioning the tooltip."
     )
-    callbacks: Optional[TooltipCallbacks] = Field(
+    callbacks: TooltipCallbacks | None = Field(
         None, description="See the callbacks section."
     )
-    itemSort: Optional[Function] = Field(None, description="Sort tooltip items.")
-    filter: Optional[Function] = Field(None, description="Filter tooltip items.")
-    backgroundColor: Optional[Color] = Field(
+    itemSort: Function | None = Field(None, description="Sort tooltip items.")
+    filter: Function | None = Field(None, description="Filter tooltip items.")
+    backgroundColor: Color | None = Field(
         None, description="Background color of the tooltip."
     )
-    titleColor: Optional[Color] = Field(None, description="Color of title text.")
-    titleFont: Optional[Font] = Field(None, description="See Fonts.")
-    titleAlign: Optional[str] = Field(
+    titleColor: Color | None = Field(None, description="Color of title text.")
+    titleFont: Font | None = Field(None, description="See Fonts.")
+    titleAlign: str | None = Field(
         None, description="Horizontal alignment of the title text lines."
     )
-    titleSpacing: Optional[number] = Field(
+    titleSpacing: number | None = Field(
         None, description="Spacing to add to top and bottom of each title line."
     )
-    titleMarginBottom: Optional[number] = Field(
+    titleMarginBottom: number | None = Field(
         None, description="Margin to add on bottom of title section."
     )
-    bodyColor: Optional[Color] = Field(None, description="Color of body text.")
-    bodyFont: Optional[Font] = Field(None, description="See Fonts.")
-    bodyAlign: Optional[str] = Field(
+    bodyColor: Color | None = Field(None, description="Color of body text.")
+    bodyFont: Font | None = Field(None, description="See Fonts.")
+    bodyAlign: str | None = Field(
         None, description="Horizontal alignment of the body text lines."
     )
-    bodySpacing: Optional[int] = Field(
+    bodySpacing: int | None = Field(
         None, description="Spacing to add to top and bottom of each tooltip item."
     )
-    footerColor: Optional[Color] = Field(None, description="Color of footer text.")
-    footerFont: Optional[Font] = Field(None, description="See Fonts.")
-    footerAlign: Optional[str] = Field(
+    footerColor: Color | None = Field(None, description="Color of footer text.")
+    footerFont: Font | None = Field(None, description="See Fonts.")
+    footerAlign: str | None = Field(
         None, description="Horizontal alignment of the footer text lines."
     )
-    footerSpacing: Optional[int] = Field(
+    footerSpacing: int | None = Field(
         None, description="Spacing to add to top and bottom of each footer line."
     )
-    footerMarginTop: Optional[int] = Field(
+    footerMarginTop: int | None = Field(
         None, description="Margin to add before drawing the footer."
     )
-    padding: Optional[Padding] = Field(None, description="Padding inside the tooltip.")
-    caretPadding: Optional[int] = Field(
+    padding: Padding | None = Field(None, description="Padding inside the tooltip.")
+    caretPadding: int | None = Field(
         None,
         description="Extra distance to move the end of the tooltip arrow away from the tooltip point.",
     )
-    caretSize: Optional[int] = Field(
+    caretSize: int | None = Field(
         None, description="Size, in px, of the tooltip arrow."
     )
-    cornerRadius: Optional[int] = Field(
+    cornerRadius: int | None = Field(
         None, description="Radius of tooltip corner curves."
     )
-    multiKeyBackground: Optional[Color] = Field(
+    multiKeyBackground: Color | None = Field(
         None,
         description="Color to draw behind the colored boxes when multiple items are in the tooltip.",
     )
-    displayColors: Optional[bool] = Field(
+    displayColors: bool | None = Field(
         None, description="If true, color boxes are shown in the tooltip."
     )
-    boxWidth: Optional[int] = Field(
+    boxWidth: int | None = Field(
         None, description="Width of the color box if displayColors is true."
     )
-    boxHeight: Optional[int] = Field(
+    boxHeight: int | None = Field(
         None, description="Height of the color box if displayColors is true."
     )
-    boxPadding: Optional[int] = Field(
+    boxPadding: int | None = Field(
         None, description="Padding between the color box and the text."
     )
-    usePointStyle: Optional[int] = Field(
+    usePointStyle: int | None = Field(
         None,
         description="Use the corresponding point style (from dataset options) instead of color boxes, ex: star, triangle etc. (size is based on the minimum value between boxWidth and boxHeight).",
     )
-    borderColor: Optional[Color] = Field(None, description="Color of the border.")
-    borderWidth: Optional[int] = Field(None, description="Size of the border.")
-    rtl: Optional[bool] = Field(
+    borderColor: Color | None = Field(None, description="Color of the border.")
+    borderWidth: int | None = Field(None, description="Size of the border.")
+    rtl: bool | None = Field(
         None, description="true for rendering the tooltip from right to left."
     )
-    textDirection: Optional[Literal["rtl", "ltr"]] = Field(
+    textDirection: Literal["rtl", "ltr"] | None = Field(
         None,
         description="This will force the text direction 'rtl' or 'ltr on the canvas for rendering the tooltips, regardless of the css specified on the canvas",
     )
-    xAlign: Optional[str] = Field(
+    xAlign: str | None = Field(
         None, description="Position of the tooltip caret in the X direction."
     )
-    yAlign: Optional[str] = Field(
+    yAlign: str | None = Field(
         None, description="Position of the tooltip caret in the Y direction."
     )
 
 
 class Plugins(BaseModel):
-    legend: Optional[Legend] = None
-    title: Optional[Title] = None
-    datalabels: Optional[Union[DataLabelsPlugin, List[DataLabelsPlugin]]] = None
-    tooltip: Optional[Tooltip] = None
+    legend: Legend | None = None
+    title: Title | None = None
+    datalabels: DataLabelsPlugin | list[DataLabelsPlugin] | None = None
+    tooltip: Tooltip | None = None
 
 
 class Ticks(BaseModel):
@@ -372,108 +369,104 @@ class Ticks(BaseModel):
     Namespace: options.scales[scaleId].ticks
     """
 
-    beginAtZero: Optional[bool] = None
-    backdropColor: Optional[Color] = Field(
+    beginAtZero: bool | None = None
+    backdropColor: Color | None = Field(
         default=None, description="Color of label backdrops."
     )
-    backdropPadding: Optional[Padding] = Field(
+    backdropPadding: Padding | None = Field(
         default=None, description="Padding of label backdrop."
     )
-    callback: Optional[Function] = Field(
+    callback: Function | None = Field(
         default=None,
         description="Returns the string representation of the tick value as it should be displayed on the chart..",
     )
-    display: Optional[bool] = Field(
-        default=None, description="If true, show tick labels."
-    )
-    color: Optional[Color] = Field(default=None, description="Color of ticks.")
-    font: Optional[Font] = None
-    major: Optional[Dict] = Field(
-        default=None, description="Major ticks configuration."
-    )
-    padding: Optional[int] = Field(
+    display: bool | None = Field(default=None, description="If true, show tick labels.")
+    color: Color | None = Field(default=None, description="Color of ticks.")
+    font: Font | None = None
+    major: dict | None = Field(default=None, description="Major ticks configuration.")
+    padding: int | None = Field(
         default=None, description="Sets the offset of the tick labels from the axis"
     )
-    showLabelBackdrop: Optional[bool] = Field(
+    showLabelBackdrop: bool | None = Field(
         default=None, description="If true, draw a background behind the tick labels."
     )
-    stepSize: Optional[int] = None
-    textStrokeColor: Optional[Color] = Field(
+    stepSize: int | None = None
+    textStrokeColor: Color | None = Field(
         default=None, description="The color of the stroke around the text."
     )
-    textStrokeWidth: Optional[int] = Field(
+    textStrokeWidth: int | None = Field(
         default=None, description="Stroke width around the text."
     )
-    z: Optional[int] = Field(
+    z: int | None = Field(
         default=None,
         description="z-index of tick layer. Useful when ticks are drawn on chart area. Values <= 0 are drawn under datasets, > 0 on top.",
     )
 
 
 class Grid(BaseModel):
-    borderColor: Optional[Color] = Field(
+    borderColor: Color | None = Field(
         default=None, description="The color of the border line."
     )
-    borderWidth: Optional[float] = Field(
+    borderWidth: float | None = Field(
         default=None, description="The width of the border line."
     )
-    borderDash: Optional[List[float]] = Field(
+    borderDash: list[float] | None = Field(
         default=None, description="Length and spacing of dashes on grid lines. See MDN."
     )
-    borderDashOffset: Optional[float] = Field(
+    borderDashOffset: float | None = Field(
         default=None, description="Offset for line dashes. See MDN."
     )
-    circular: Optional[bool] = Field(
+    circular: bool | None = Field(
         default=None,
         description="If true, gridlines are circular (on radar chart only).",
     )
-    color: Optional[Color] = Field(
+    color: Color | None = Field(
         default=None,
         description="The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line, and so on.",
     )
-    display: Optional[bool] = Field(
+    display: bool | None = Field(
         default=None, description="If false, do not display grid lines for this axis."
     )
-    drawBorder: Optional[bool] = Field(
+    drawBorder: bool | None = Field(
         default=None,
         description="If true, draw a border at the edge between the axis and the chart area.",
     )
-    drawOnChartArea: Optional[bool] = Field(
+    drawOnChartArea: bool | None = Field(
         default=None,
         description="If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to control which grid lines are drawn.",
     )
-    drawTicks: Optional[bool] = Field(
+    drawTicks: bool | None = Field(
         default=None,
         description="If true, draw lines beside the ticks in the axis area beside the chart.",
     )
-    lineWidth: Optional[float] = Field(
+    lineWidth: float | None = Field(
         default=None, description="Stroke width of grid lines."
     )
-    offset: Optional[bool] = Field(
+    offset: bool | None = Field(
         default=None,
         description="If true, grid lines will be shifted to be between labels. This is set to true for a bar chart by default.",
     )
-    tickBorderDash: Optional[List[float]] = Field(
+    tickBorderDash: list[float] | None = Field(
         default=None,
         description="Length and spacing of the tick mark line. If not set, defaults to the grid line borderDash value.",
     )
-    tickBorderDashOffset: Optional[float] = Field(
+    tickBorderDashOffset: float | None = Field(
         default=None,
         description="Offset for the line dash of the tick mark. If unset, defaults to the grid line borderDashOffset value",
     )
-    tickColor: Optional[Color] = Field(
+    tickColor: Color | None = Field(
         default=None,
         description="Color of the tick line. If unset, defaults to the grid line color.",
     )
-    tickLength: Optional[int] = Field(
+    tickLength: int | None = Field(
         default=None,
         description="Length in pixels that the grid lines will draw into the axis area.",
     )
-    tickWidth: Optional[int] = Field(
+    tickWidth: int | None = Field(
         default=None,
         description="Width of the tick mark in pixels. If unset, defaults to the grid line width.",
     )
-    z: Optional[int] = Field(
+    z: int | None = Field(
         default=None,
         description="z-index of gridline layer. Values <= 0 are drawn under datasets, > 0 on top.",
     )
@@ -484,141 +477,141 @@ class CartesianTicks(Ticks):
     Namespace: options.scales[scaleId].ticks
     """
 
-    align: Optional[str] = Field(
+    align: str | None = Field(
         default=None,
         description="The tick alignment along the axis. Can be 'start', 'center', or 'end'.",
     )
-    crossAlign: Optional[str] = Field(
+    crossAlign: str | None = Field(
         default=None,
         description="The tick alignment perpendicular to the axis. Can be 'near', 'center', or 'far'. See Tick Alignment",
     )
-    sampleSize: Optional[int] = Field(
+    sampleSize: int | None = Field(
         default=None,
         description="The number of ticks to examine when deciding how many labels will fit. Setting a smaller value will be faster, but may be less accurate when there is large variability in label length.",
     )
-    autoSkip: Optional[bool] = Field(
+    autoSkip: bool | None = Field(
         default=None,
         description="If true, automatically calculates how many labels can be shown and hides labels accordingly. Labels will be rotated up to maxRotation before skipping any. Turn autoSkip off to show all labels no matter what.",
     )
-    autoSkipPadding: Optional[int] = Field(
+    autoSkipPadding: int | None = Field(
         default=None,
         description="Padding between the ticks on the horizontal axis when autoSkip is enabled.",
     )
-    includeBounds: Optional[bool] = Field(
+    includeBounds: bool | None = Field(
         default=None,
         description='Should the defined min and max values be presented as ticks even if they are not "nice".',
     )
-    labelOffset: Optional[int] = Field(
+    labelOffset: int | None = Field(
         default=None,
         description="Distance in pixels to offset the label from the centre point of the tick (in the x-direction for the horizontal axis, and the y-direction for the vertical axis).",
     )
-    minRotation: Optional[int] = Field(
+    minRotation: int | None = Field(
         default=None, description="Minimum rotation for tick labels, in degrees."
     )
-    maxRotation: Optional[int] = Field(
+    maxRotation: int | None = Field(
         default=None, description="Maximum rotation for tick labels, in degrees."
     )
-    mirror: Optional[bool] = Field(
+    mirror: bool | None = Field(
         default=None,
         description="Flips tick labels around axis, displaying the labels inside the chart instead of outside.",
     )
-    padding: Optional[int] = Field(
+    padding: int | None = Field(
         default=None, description="Padding between the tick label and the axis."
     )
-    showLabelBackdrop: Optional[bool] = Field(
+    showLabelBackdrop: bool | None = Field(
         default=None, description="If true, draw a background behind the tick labels."
     )
-    textStrokeColor: Optional[Color] = Field(
+    textStrokeColor: Color | None = Field(
         default=None, description="The color of the stroke around the text."
     )
-    textStrokeWidth: Optional[int] = Field(
+    textStrokeWidth: int | None = Field(
         default=None, description="Stroke width around the text."
     )
-    z: Optional[int] = Field(
+    z: int | None = Field(
         default=None,
         description="z-index of tick layer. Useful when ticks are drawn on chart area. Values <= 0 are drawn under datasets, > 0 on top.",
     )
 
 
 class ScaleOptions(BaseModel):
-    display: Optional[bool] = True
-    beginAtZero: Optional[bool] = None
-    title: Optional[Title] = None
-    min: Optional[int] = None
-    max: Optional[int] = None
-    stacked: Optional[bool] = None
-    position: Optional[str] = None
+    display: bool | None = True
+    beginAtZero: bool | None = None
+    title: Title | None = None
+    min: int | None = None
+    max: int | None = None
+    stacked: bool | None = None
+    position: str | None = None
     offset: bool = True
-    ticks: Optional[Union[Ticks, CartesianTicks]] = None
-    barThickness: Optional[int] = None
-    labels: Optional[Any] = None
-    grid: Optional[Grid] = None
-    type: Optional[str] = None
+    ticks: Ticks | CartesianTicks | None = None
+    barThickness: int | None = None
+    labels: Any | None = None
+    grid: Grid | None = None
+    type: str | None = None
 
 
 class Scales(BaseModel):
-    y: Optional[ScaleOptions] = None
-    x: Optional[ScaleOptions] = None
+    y: ScaleOptions | None = None
+    x: ScaleOptions | None = None
     # Added for datalabels plugin
-    xAxes: Optional[List[ScaleOptions]] = None
-    yAxes: Optional[List[ScaleOptions]] = None
+    xAxes: list[ScaleOptions] | None = None
+    yAxes: list[ScaleOptions] | None = None
     # x1, y1 represent additional
-    y1: Optional[ScaleOptions] = None
-    x1: Optional[ScaleOptions] = None
-    grid: Optional[Grid] = None
+    y1: ScaleOptions | None = None
+    x1: ScaleOptions | None = None
+    grid: Grid | None = None
 
 
 class Interaction(BaseModel):
-    intersect: Optional[bool] = None  # False for stacked charts
-    mode: Optional[str] = Field(
+    intersect: bool | None = None  # False for stacked charts
+    mode: str | None = Field(
         None,
         description="Sets which elements appear in the interaction. See Interaction Modes for details.",
     )
-    axis: Optional[str] = "x"
-    includeInvisible: Optional[bool] = False
+    axis: str | None = "x"
+    includeInvisible: bool | None = False
 
 
 class Options(BaseModel):
-    responsive: Optional[bool] = Field(
+    responsive: bool | None = Field(
         True,
         description="Resizes the chart canvas when its container does (important note...).",
     )
-    maintainAspectRatio: Optional[bool] = Field(
+    maintainAspectRatio: bool | None = Field(
         True,
         description="Maintain the original canvas aspect ratio (width / height) when resizing.",
     )
-    aspectRatio: Optional[Union[number, Function]] = Field(
+    aspectRatio: number | Function | None = Field(
         2,
         description="Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas). Note that this option is ignored if the height is explicitly defined either as attribute or via the style.",
     )
-    onResize: Optional[Function] = Field(
+    onResize: Function | None = Field(
         None,
         description="Called when a resize occurs. Gets passed two arguments: the chart instance and the new size.",
     )
-    resizeDelay: Optional[number] = Field(
+    resizeDelay: number | None = Field(
         0,
         description="Delay the resize update by give amount of milliseconds. This can ease the resize process by debouncing update of the elements.",
     )
 
-    plugins: Optional[Plugins] = None
-    scales: Optional[Scales] = None
-    elements: Optional[Elements] = None
-    indexAxis: Optional[str] = None
-    interaction: Optional[Interaction] = None
+    plugins: Plugins | None = None
+    scales: Scales | None = None
+    elements: Elements | None = None
+    indexAxis: str | None = None
+    interaction: Interaction | None = None
 
     # Bar chart option
-    barPercentage: Optional[float] = None
-    layout: Optional[Layout] = None
-    stacked: Optional[bool] = False
+    barPercentage: float | None = None
+    layout: Layout | None = None
+    stacked: bool | None = False
 
     # Doughnut chart
-    cutout: Optional[str] = None
+    cutout: str | None = None
 
 
 class Config(BaseModel):
-    type: Union[ChartType, str] = ChartType.line
-    data: Optional[Data] = None
-    options: Optional[Options] = None
+    type: ChartType | str = ChartType.line
+    data: Data | None = None
+    options: Options | None = None
 
 
 if __name__ == "__main__":

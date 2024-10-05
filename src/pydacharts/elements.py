@@ -1,52 +1,52 @@
-from typing import Union, Optional, List, Literal, Dict
+from typing import Literal
+
 from pydantic import BaseModel, Field
-from pydacharts.chartjs_types import PointStyle, number, Color
+
+from pydacharts.chartjs_types import Color, PointStyle, number
 
 
 class PointsElements(BaseModel):
-    radius: Optional[number] = Field(None, description="Point radius.")
-    pointStyle: Optional[PointStyle] = Field(None, description="Point style.")
-    rotation: Optional[number] = Field(None, description="Point rotation (in degrees).")
-    backgroundColor: Optional[Color] = Field(None, description="Point fill color.")
-    borderWidth: Optional[number] = Field(None, description="Point stroke width.")
-    borderColor: Optional[Color] = Field(None, description="Point stroke color.")
-    hitRadius: Optional[number] = Field(
+    radius: number | None = Field(None, description="Point radius.")
+    pointStyle: PointStyle | None = Field(None, description="Point style.")
+    rotation: number | None = Field(None, description="Point rotation (in degrees).")
+    backgroundColor: Color | None = Field(None, description="Point fill color.")
+    borderWidth: number | None = Field(None, description="Point stroke width.")
+    borderColor: Color | None = Field(None, description="Point stroke color.")
+    hitRadius: number | None = Field(
         None, description="Extra radius added to point radius for hit detection."
     )
-    hoverRadius: Optional[number] = Field(
-        None, description="Point radius when hovered."
-    )
-    hoverBorderWidth: Optional[number] = Field(
+    hoverRadius: number | None = Field(None, description="Point radius when hovered.")
+    hoverBorderWidth: number | None = Field(
         None, description="Stroke width when hovered."
     )
 
 
 class LinesElements(BaseModel):
-    tension: Optional[number] = Field(
+    tension: number | None = Field(
         None, description="Bézier curve tension (0 for no Bézier curves)."
     )
-    backgroundColor: Optional[Color] = Field(None, description="Line fill color.")
-    borderWidth: Optional[number] = Field(None, description="Line stroke width.")
-    borderColor: Optional[Color] = Field(None, description="Line stroke color.")
-    borderCapStyle: Optional[str] = Field(None, description="Line cap style. See MDN")
-    borderDash: Optional[List[number]] = Field(None, description="Line dash. See MDN")
-    borderDashOffset: Optional[number] = Field(
+    backgroundColor: Color | None = Field(None, description="Line fill color.")
+    borderWidth: number | None = Field(None, description="Line stroke width.")
+    borderColor: Color | None = Field(None, description="Line stroke color.")
+    borderCapStyle: str | None = Field(None, description="Line cap style. See MDN")
+    borderDash: list[number] | None = Field(None, description="Line dash. See MDN")
+    borderDashOffset: number | None = Field(
         None, description="Line dash offset. See MDN"
     )
-    borderJoinStyle: Optional[Literal["round", "bevel", "miter"]] = Field(
+    borderJoinStyle: Literal["round", "bevel", "miter"] | None = Field(
         None, description="Line join style. See MDN"
     )
-    capBezierPoints: Optional[bool] = Field(
+    capBezierPoints: bool | None = Field(
         None,
         description="true to keep Bézier control inside the chart, false for no restriction.",
     )
-    cubicInterpolationMode: Optional[str] = Field(
+    cubicInterpolationMode: str | None = Field(
         None, description="Interpolation mode to apply. See more..."
     )
-    fill: Optional[Union[bool, str]] = Field(
+    fill: bool | str | None = Field(
         None, description="How to fill the area under the line. See area charts."
     )
-    stepped: Optional[bool] = Field(
+    stepped: bool | None = Field(
         None,
         description="true to show the line as a stepped line (tension will be ignored).",
     )
@@ -59,23 +59,24 @@ class BarsElements(BaseModel):
     Namespace: options.elements.bar, global bar options: Chart.defaults.elements.bar.
     """
 
-    backgroundColor: Optional[Color] = Field(None, description="Bar fill color.")
-    borderWidth: Optional[number] = Field(None, description="Bar stroke width.")
-    borderColor: Optional[Color] = Field(None, description="Bar stroke color.")
-    borderSkipped: Optional[
+    backgroundColor: Color | None = Field(None, description="Bar fill color.")
+    borderWidth: number | None = Field(None, description="Bar stroke width.")
+    borderColor: Color | None = Field(None, description="Bar stroke color.")
+    borderSkipped: (
         Literal["start", "end", "middle", "bottom", "left", "top", "right", False]
-    ] = Field(
+        | None
+    ) = Field(
         None,
         description="Skipped (excluded) border: 'start', 'end', 'middle', 'bottom', 'left', 'top', 'right' or false.",
     )
-    borderRadius: Optional[Union[number, Dict]] = Field(
+    borderRadius: number | dict | None = Field(
         None, description="The bar border radius (in pixels)."
     )
-    inflateAmount: Optional[Union[number, Literal["auto"]]] = Field(
+    inflateAmount: number | Literal["auto"] | None = Field(
         None,
         description="The amount of pixels to inflate the bar rectangle(s) when drawing.",
     )
-    pointStyle: Optional[PointStyle] = Field(
+    pointStyle: PointStyle | None = Field(
         None, description="Style of the point for legend."
     )
 
@@ -87,16 +88,16 @@ class ArcElements(BaseModel):
     Namespace: options.elements.arc, global arc options: Chart.defaults.elements.arc.
     """
 
-    angle: Optional[number] = Field(None, description="Arc angle to cover.")
-    backgroundColor: Optional[Color] = Field(None, description="Arc fill color.")
-    borderAlign: Optional[Literal["center", "inner"]] = Field(
+    angle: number | None = Field(None, description="Arc angle to cover.")
+    backgroundColor: Color | None = Field(None, description="Arc fill color.")
+    borderAlign: Literal["center", "inner"] | None = Field(
         None, description="Arc stroke alignment."
     )
-    borderColor: Optional[Color] = Field(None, description="Arc stroke color.")
-    borderJoinStyle: Optional[Literal["round", "bevel", "miter", "bevel", "round"]] = (
+    borderColor: Color | None = Field(None, description="Arc stroke color.")
+    borderJoinStyle: Literal["round", "bevel", "miter", "bevel", "round"] | None = (
         Field(None, description="Line join style")
     )
-    borderWidth: Optional[number] = Field(None, description="Arc stroke width.")
+    borderWidth: number | None = Field(None, description="Arc stroke width.")
 
 
 class Elements(BaseModel):
@@ -104,10 +105,10 @@ class Elements(BaseModel):
     arc, lines, points, and bars.
     """
 
-    arc: Optional[ArcElements] = None
-    lines: Optional[LinesElements] = None
-    points: Optional[PointsElements] = None
-    bars: Optional[BarsElements] = None
+    arc: ArcElements | None = None
+    lines: LinesElements | None = None
+    points: PointsElements | None = None
+    bars: BarsElements | None = None
 
 
 if __name__ == "__main__":

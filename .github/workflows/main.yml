@@ -30,23 +30,18 @@ jobs:
 
     - name: Lint with flake8
       if: always()
-      run: |
-        poetry run flake8 .
+      run: uv run ruff check .
 
     - name: Test mypy
       if: always()
-      run:  poetry run mypy .
-
-    - name: Test with black
-      if: always()
-      run: poetry run black --check .
+      run:  uv run mypy .
 
     - name: Test with pytest
       if: always()
-      run: poetry run pytest --cov
+      run: uv run pytest --cov
 
     - name: Produce coverage XML
-      run: poetry run coverage xml
+      run: uv run coverage xml
 
     - name: "Upload coverage to Codecov"
       uses: codecov/codecov-action@v2

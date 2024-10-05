@@ -1,14 +1,14 @@
 from pydacharts.models import (
-    Options,
-    Scales,
     ChartType,
-    Dataset,
-    ScaleOptions,
-    Data,
     Config,
+    Data,
+    Dataset,
+    Options,
+    ScaleOptions,
+    Scales,
 )
 from pydacharts.plugins.datalabels import Label
-from tests.test_datalabels import CenteredDataLabel, PluginsDataLabels, OffsetTicks
+from tests.test_datalabels import CenteredDataLabel, OffsetTicks, PluginsDataLabels
 
 
 class RightAlignedScale(ScaleOptions):
@@ -33,7 +33,7 @@ def config():
         indexAxis="y",
         scales=Scales(
             y=RightAlignedScale(
-                labels=["${0:.0f} M".format(n[1] / 1e6) for n in _data],
+                labels=[f"${n[1] / 1e6:.0f} M" for n in _data],
             ),
         ),
         plugins=PluginsDataLabels(

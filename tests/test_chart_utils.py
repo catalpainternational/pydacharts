@@ -1,10 +1,11 @@
+import pytest
+
 from pydacharts.chart_utils import (
-    HorizontalBarChartStackedOptions,
-    DoughnutChartOptions,
     BarChartOptions,
+    DoughnutChartOptions,
+    HorizontalBarChartStackedOptions,
     PyramidChartOptions,
 )
-import pytest
 
 
 @pytest.mark.parametrize(

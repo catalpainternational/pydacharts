@@ -1,5 +1,3 @@
-from typing import Dict, List, Optional
-
 from pydantic import BaseModel
 
 from pydacharts.models import Config
@@ -12,14 +10,14 @@ class SankeyDatasetData(BaseModel):
 
 
 class SankeyDataSet(BaseModel):
-    data: List[SankeyDatasetData]
+    data: list[SankeyDatasetData]
     colorMode: str = "gradient"
-    labels: Optional[Dict[str, str]]
-    priority: Optional[Dict[str, int]]
+    labels: dict[str, str] | None
+    priority: dict[str, int] | None
 
 
 class SankeyData(BaseModel):
-    datasets: List[SankeyDataSet]
+    datasets: list[SankeyDataSet]
 
 
 class Sankey(Config):

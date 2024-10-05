@@ -1,26 +1,26 @@
+import pytest
+
 from pydacharts.models import (
-    Layout,
+    Config,
+    Data,
+    Dataset,
+    Font,
+    Grid,
     Interaction,
-    Scales,
+    Layout,
+    Legend,
+    LegendLabels,
+    LegendTitle,
+    Options,
+    Plugins,
     ScaleOptions,
+    Scales,
     Ticks,
+    Title,
     Tooltip,
     TooltipCallbacks,
-    Legend,
-    LegendTitle,
-    LegendLabels,
-    Title,
-    Dataset,
-    Data,
-    Font,
-    Plugins,
-    Grid,
-    Options,
-    Config,
 )
 from pydacharts.plugins.datalabels import DataLabelsPlugin
-
-import pytest
 
 
 @pytest.mark.parametrize(

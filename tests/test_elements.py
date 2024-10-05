@@ -1,6 +1,6 @@
 import pytest
 
-from pydacharts.elements import ArcElements, LinesElements, PointsElements, BarsElements
+from pydacharts.elements import ArcElements, BarsElements, LinesElements, PointsElements
 
 
 @pytest.mark.parametrize(

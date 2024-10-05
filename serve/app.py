@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+
 from .serve_data import config
 
 app = Flask(__name__)

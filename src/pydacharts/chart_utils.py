@@ -1,5 +1,3 @@
-from typing import Optional, Union
-
 from pydacharts.chartjs_types import Font, Function, PaddingObject, number
 from pydacharts.elements import BarsElements
 from pydacharts.models import (
@@ -36,13 +34,13 @@ def chart_options() -> Options:
 
 
 class BarChartOptions(Options):
-    barPercentage: Optional[float] = 0.6
-    aspectRatio: Optional[Union[number, Function]] = "aspectRatioFunction"
+    barPercentage: float | None = 0.6
+    aspectRatio: number | Function | None = "aspectRatioFunction"
     elements: Elements = Elements(bars=BarsElements(borderRadius=10))
 
 
 class HorizontalBarChartOptions(BarChartOptions):
-    indexAxis: Optional[str] = "y"
+    indexAxis: str | None = "y"
     plugins: Plugins = Plugins(datalabels=DataLabelsPlugin(align="end", anchor="end"))
 
 
