@@ -11,16 +11,26 @@
             <canvas id="myChart"></canvas>
         </div>
 
-        <pre>
-            {{config | safe}}
+        <pre id="chartcode">
+
         </pre>
 
         <script>
-            const data = {{config | safe}}
-            Chart.register(ChartDataLabels);
-            data.options.plugins.datalabels.labels.name.formatter = function(value, context) { return context.chart.data.labels[context.dataIndex]};
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, data);
+            async function initializeChart() {
+                const response = await fetch("/chart");
+                const data = await response.json();
+                Chart.register(ChartDataLabels);
+                data.options.plugins.datalabels.labels.name.formatter = function(value, context) { 
+                    return context.chart.data.labels[context.dataIndex];
+                };
+                debugger;
+                
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, data);
+                document.getElementById('chartcode').innerText = JSON.stringify(data, null, 2);
+            }
+
+            document.addEventListener('DOMContentLoaded', initializeChart);
         </script>
     </body>
 </html>
