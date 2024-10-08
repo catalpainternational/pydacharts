@@ -1,5 +1,3 @@
-from typing import Optional, Union
-
 from pydacharts.chartjs_types import Font, Function, PaddingObject, number
 from pydacharts.elements import BarsElements
 from pydacharts.models import (
@@ -28,25 +26,29 @@ def chart_options() -> Options:
         ),
         plugins=Plugins(
             legend=Legend(display=False),
-            tooltip=Tooltip(position="cursor", enabled=False, external="externalTooltipHandler"),
+            tooltip=Tooltip(
+                position="cursor", enabled=False, external="externalTooltipHandler"
+            ),
         ),
     )
 
 
 class BarChartOptions(Options):
-    barPercentage: Optional[float] = 0.6
-    aspectRatio: Optional[Union[number, Function]] = "aspectRatioFunction"
+    barPercentage: float | None = 0.6
+    aspectRatio: number | Function | None = "aspectRatioFunction"
     elements: Elements = Elements(bars=BarsElements(borderRadius=10))
 
 
 class HorizontalBarChartOptions(BarChartOptions):
-    indexAxis: Optional[str] = "y"
+    indexAxis: str | None = "y"
     plugins: Plugins = Plugins(datalabels=DataLabelsPlugin(align="end", anchor="end"))
 
 
 class HorizontalBarChartStackedOptions(HorizontalBarChartOptions):
     layout: Layout = Layout(padding=PaddingObject(right=40))
-    aspectRatio: Function = "(context) => { return Math.max(2, 10 / context.chart.data.labels.length);"
+    aspectRatio: Function = (
+        "(context) => { return Math.max(2, 10 / context.chart.data.labels.length);"
+    )
     scales: Scales = Scales(
         y=ScaleOptions(stacked=True, grid=Grid(display=False)),
         x=ScaleOptions(stacked=True, grid=Grid(display=False)),
@@ -67,7 +69,11 @@ class PyramidChartOptions(HorizontalBarChartStackedOptions):
         x=ScaleOptions(
             display=True,
             grid=Grid(display=True),
-            ticks=Ticks(beginAtZero=True, callback="(value) => `${Math.abs(value) / 1000}k`;", stepSize=2000),
+            ticks=Ticks(
+                beginAtZero=True,
+                callback="(value) => `${Math.abs(value) / 1000}k`;",
+                stepSize=2000,
+            ),
         ),
     )
     plugins: Plugins = Plugins(
@@ -91,4 +97,6 @@ class DoughnutChartOptions(Options):
         y=ScaleOptions(display=False, grid=Grid(display=False)),
         x=ScaleOptions(display=False, grid=Grid(display=False)),
     )
-    plugins: Plugins = Plugins(title=Title(padding=20, color="#70798C", font=Font(size=20, weight="normal")))
+    plugins: Plugins = Plugins(
+        title=Title(padding=20, color="#70798C", font=Font(size=20, weight="normal"))
+    )

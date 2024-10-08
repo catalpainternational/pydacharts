@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -35,18 +35,18 @@ class Label(BaseModel):
         left = "left"
         top = "top"
 
-    align: Optional[Align] = None
-    anchor: Optional[Anchor] = None
-    clamp: Optional[bool] = None
-    color: Optional[Color] = None
-    font: Optional[Font] = None
-    formatter: Optional[str] = None
-    offset: Optional[int] = None
-    opacity: Optional[float] = None
+    align: Align | None = None
+    anchor: Anchor | None = None
+    clamp: bool | None = None
+    color: Color | None = None
+    font: Font | None = None
+    formatter: str | None = None
+    offset: int | None = None
+    opacity: float | None = None
 
-    padding: Optional[int] = None
-    borderRadius: Optional[int] = None
-    backgroundColor: Optional[Color] = None
+    padding: int | None = None
+    borderRadius: int | None = None
+    backgroundColor: Color | None = None
 
 
 """
@@ -74,34 +74,34 @@ degrees = int
 
 
 class DataLabelsPlugin(BaseModel):
-    align: Optional[Union[align_values, degrees]] = None
-    anchor: Optional[str] = "center"
-    backgroundColor: Optional[DataLabelsPluginStyle] = None
-    borderColor: Optional[DataLabelsPluginStyle] = None
-    borderRadius: Optional[number] = None
-    borderWidth: Optional[number] = None
-    clamp: Optional[bool] = None
-    clip: Optional[bool] = None
-    color: Optional[DataLabelsPluginStyle] = None
-    display: Optional[Union[Function, Literal[True, False, "auto"]]] = Field(
+    align: align_values | degrees | None = None
+    anchor: str | None = "center"
+    backgroundColor: DataLabelsPluginStyle | None = None
+    borderColor: DataLabelsPluginStyle | None = None
+    borderRadius: number | None = None
+    borderWidth: number | None = None
+    clamp: bool | None = None
+    clip: bool | None = None
+    color: DataLabelsPluginStyle | None = None
+    display: Function | Literal[True, False, "auto"] | None = Field(
         True, description="controls the visibility of labels"
     )
-    font: Optional[Font] = None
-    formatter: Optional[Function] = None
-    labels: Optional[object] = None
-    listeners: Optional[object] = None
-    offset: Optional[number] = Field(
+    font: Font | None = None
+    formatter: Function | None = None
+    labels: object | None = None
+    listeners: object | None = None
+    offset: number | None = Field(
         4,
         description="The offset represents the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is 'center'. Also note that if align is 'start', the label is moved in the opposite direction. The default value is 4.",
     )
-    opacity: Optional[number] = None
-    padding: Optional[Padding] = None
-    rotation: Optional[degrees] = None
-    textAlign: Optional[str] = None
-    textStrokeColor: Optional[DataLabelsPluginStyle] = None
-    textStrokeWidth: Optional[number] = None
-    textShadowBlur: Optional[number] = None
-    textShadowColor: Optional[Color] = None
+    opacity: number | None = None
+    padding: Padding | None = None
+    rotation: degrees | None = None
+    textAlign: str | None = None
+    textStrokeColor: DataLabelsPluginStyle | None = None
+    textStrokeWidth: number | None = None
+    textShadowBlur: number | None = None
+    textShadowColor: Color | None = None
 
 
 if __name__ == "__main__":

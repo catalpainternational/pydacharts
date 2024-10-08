@@ -50,13 +50,15 @@ def test_datalabels():
         indexAxis="y",
         scales=Scales(
             y=RightAlignedScale(
-                labels=["${0:.0f} M".format(n[1] / 1e6) for n in _data],
+                labels=[f"${n[1] / 1e6:.0f} M" for n in _data],
             ),
         ),
         plugins=PluginsDataLabels(
             datalabels=CenteredDataLabel(
                 labels=dict(
-                    name=Label(anchor=Label.Anchor.start, align=Label.Align.end, clamp=True),
+                    name=Label(
+                        anchor=Label.Anchor.start, align=Label.Align.end, clamp=True
+                    ),
                 )
             )
         ),
