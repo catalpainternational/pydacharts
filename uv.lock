@@ -365,7 +365,7 @@ wheels = [
 
 [[package]]
 name = "pydacharts"
-version = "0.2.0.dev2"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "pydantic" },
