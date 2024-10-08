@@ -18,7 +18,8 @@ classifiers = [
 
 [project.optional-dependencies]
 serve = [
-    "flask>=3.0.3",
+    "fastapi[standard]>=0.115.0",
+    "jinja2>=3.1.4",
 ]
 
 [tool.pytest.ini_options]
