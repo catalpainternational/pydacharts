@@ -37,11 +37,45 @@ For running examples
 
 ```bash
 uv sync --extra serve
+uv .venv/bin/activate
 cd serve
-flask run
+fastapi run
 ```
 
-go to localhost:5000
+go to localhost:8000
+
+## Dev
+
+Linting is done with ruff & mypy, testing with pytest. Expected output is like this:
+
+```sh
+(pydacharts) josh@carbonmint:~/github/catalpainternational/pydacharts$ uv run mypy .
+Success: no issues found in 25 source files
+
+(pydacharts) josh@carbonmint:~/github/catalpainternational/pydacharts$ uv run ruff check --fix .
+All checks passed!
+
+(pydacharts) josh@carbonmint:~/github/catalpainternational/pydacharts$ uv run pytest
+===================================================================================================================== test session starts =====================================================================================================================
+platform linux -- Python 3.11.10, pytest-8.3.3, pluggy-1.5.0
+rootdir: /home/josh/github/catalpainternational/pydacharts
+configfile: pyproject.toml
+plugins: cov-5.0.0, anyio-4.6.0
+collected 41 items                                                                                                                                                                                                                                            
+
+tests/test_bar.py .....                                                                                                                                                                                                                                 [ 12%]
+tests/test_chart_examples.py ..                                                                                                                                                                                                                         [ 17%]
+tests/test_chart_utils.py ....                                                                                                                                                                                                                          [ 26%]
+tests/test_datalabels.py .                                                                                                                                                                                                                              [ 29%]
+tests/test_elements.py ....                                                                                                                                                                                                                             [ 39%]
+tests/test_line.py ....                                                                                                                                                                                                                                 [ 48%]
+tests/test_models.py ..................                                                                                                                                                                                                                 [ 92%]
+tests/test_options.py .                                                                                                                                                                                                                                 [ 95%]
+tests/test_other.py .                                                                                                                                                                                                                                   [ 97%]
+tests/test_pie.py .                                                                                                                                                                                                                                     [100%]
+
+===================================================================================================================== 41 passed in 0.37s ======================================================================================================================
+```
 
 ### Building
 
